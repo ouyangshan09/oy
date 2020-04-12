@@ -1,14 +1,39 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Login from '../views/login'
+import Layout from '../layout'
 
 Vue.use(Router)
 
-const Root = { template: '<div>root</div>' }
+const child1 = { template: '<div>child1</div>' }
+const notFount = { template: '<div>404</div>' }
 
 const constantRoutes = [
   {
     path: '/',
-    component: Root,
+    component: Layout,
+    children: [
+      {
+        path: 'home',
+        component: child1,
+      },
+      {
+        path: 'profile',
+        component: child1,
+      },
+      {
+        path: '404',
+        component: notFount,
+      }
+    ],
+  },
+  {
+    path: '/login',
+    component: Login,
+  },
+  {
+    path: '*',
+    component: notFount,
   }
 ]
 
