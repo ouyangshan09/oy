@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './routes'
 import './plugins/element.js'
+import './polyfill'
 import 'normalize.css/normalize.css'
 
 Vue.config.productionTip = false

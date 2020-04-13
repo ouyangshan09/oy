@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" class="login-form" autocomplete="on">
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on">
       <div class="title-container">
         <h3 class="title">系统登录</h3>
       </div>
@@ -15,16 +15,33 @@
           name="username"
           type="text"
           auto-complete="on"
+          v-model="loginForm.username"
         />
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
           <span>svg</span>
         </span>
-        <el-input ref="password" placeholder="Password" name="password" auto-complete="on" />
+        <el-input
+          ref="password"
+          placeholder="Password"
+          name="password"
+          auto-complete="on"
+          v-model="loginForm.password"
+        />
+        <span class="show-pwd">
+          <span>svg</span>
+        </span>
       </el-form-item>
 
-      <el-button type="primary" style="width: 100%; margin-bottom:30px">Login</el-button>
+      <el-button
+        :loading="loading"
+        type="primary"
+        style="width: 100%; margin-bottom:30px"
+        @click.native.prevent="handleLogin"
+      >
+        Login
+      </el-button>
     </el-form>
   </div>
 </template>
@@ -33,19 +50,72 @@
 export default {
   name: "Login",
   data() {
+    const validatePassword = (rule, value, next) => {
+      if (!value || value.length < 6) {
+        next(new Error('输入密码的长度小于6位'))
+      } else {
+        next()
+      }
+    }
+
     return {
-      //
+      loginForm: {
+        username: 'admin',
+        password: '123456',
+      },
+      loginRules: {
+        username: [
+          { required: true, trigger: 'blur', message: '请输入账号' },
+        ],
+        password: [
+          { required: true, trigger: 'blur', validator: validatePassword },
+        ],
+      },
+      passwordType: 'password',
+      loading: false,
+      redirect: undefined,
+      queryJson: {},
     };
   },
   created() {},
   mounted() {
-    //
+    if (this.loginForm.username === '') {
+      this.$refs.username.focus()
+    } else if (this.loginForm.password === '') {
+      this.$refs.password.focus();
+    }
   },
   destroyed() {
     //
   },
   methods: {
-    //
+    handleShowPwd() {
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
+      } else {
+        this.passwordType = 'password'
+      }
+      this.$nextTick(() => {
+        this.$refs.password.focus()
+      })
+    },
+
+    handleLogin() {
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          // 开始加载
+          Promise.delay().then(() => {
+            // 异步回调结束 加载
+            this.loading = false
+            // 路由跳转
+          })
+        } else {
+          console.log('error submit!')
+          return false
+        }
+      })
+    }
   }
 };
 </script>
@@ -112,6 +182,16 @@ export default {
     display: inline-block;
     vertical-align: middle;
     width: 30pd;
+  }
+
+  .show-pwd {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    font-size: 16px;
+    color: #889aa4;
+    cursor: pointer;
+    user-select: none;
   }
 }
 </style>
