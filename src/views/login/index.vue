@@ -28,9 +28,11 @@
           name="password"
           auto-complete="on"
           v-model="loginForm.password"
+          :type="passwordType"
+          @keyup.enter.native="handleLogin"
         />
-        <span class="show-pwd">
-          <span>svg</span>
+        <span class="show-pwd" @click="handleShowPwd">
+          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
 
