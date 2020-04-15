@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './routes'
 import 'normalize.css/normalize.css'
 import './icons'
-import './permission'
+// import './permission'
 import './plugins/element.js'
 import './polyfill'
 
