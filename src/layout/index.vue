@@ -8,16 +8,18 @@
         <div>tags-view</div>
       </div>
       <!-- 路由入口 -->
-      <div>app-main</div>
+      <app-main />
     </div>
   </div>
 </template>
 
 <script>
+import { AppMain } from './components'
+
 export default {
   name: 'Layout',
   components: {
-    //
+    AppMain,
   },
   mixins: [],
   computed: {
