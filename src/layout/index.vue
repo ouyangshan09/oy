@@ -1,6 +1,6 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div class="sidebar-container">sidebar component</div>
+    <sidebar class="sidebar-container" />
     <div class="main-container">
       <!-- 工具栏 -->
       <div class="header">
@@ -14,12 +14,13 @@
 </template>
 
 <script>
-import { AppMain } from './components'
+import { AppMain, Sidebar } from './components'
 
 export default {
   name: 'Layout',
   components: {
     AppMain,
+    Sidebar,
   },
   mixins: [],
   computed: {
