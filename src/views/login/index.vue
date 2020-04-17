@@ -1,6 +1,12 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on">
+    <el-form
+      ref="loginForm"
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+      autocomplete="on"
+    >
       <div class="title-container">
         <h3 class="title">系统登录</h3>
       </div>
@@ -41,49 +47,47 @@
         type="primary"
         style="width: 100%; margin-bottom:30px"
         @click.native.prevent="handleLogin"
-      >
-        Login
-      </el-button>
+      >Login</el-button>
     </el-form>
   </div>
 </template>
 
 <script>
+import request from "../../utils/request";
+
 export default {
   name: "Login",
   data() {
     const validatePassword = (rule, value, next) => {
       if (!value || value.length < 6) {
-        next(new Error('输入密码的长度小于6位'))
+        next(new Error("输入密码的长度小于6位"));
       } else {
-        next()
+        next();
       }
-    }
+    };
 
     return {
       loginForm: {
-        username: 'admin',
-        password: '123456',
+        username: "admin",
+        password: "123456"
       },
       loginRules: {
-        username: [
-          { required: true, trigger: 'blur', message: '请输入账号' },
-        ],
+        username: [{ required: true, trigger: "blur", message: "请输入账号" }],
         password: [
-          { required: true, trigger: 'blur', validator: validatePassword },
-        ],
+          { required: true, trigger: "blur", validator: validatePassword }
+        ]
       },
-      passwordType: 'password',
+      passwordType: "password",
       loading: false,
       redirect: undefined,
-      queryJson: {},
+      queryJson: {}
     };
   },
   created() {},
   mounted() {
-    if (this.loginForm.username === '') {
-      this.$refs.username.focus()
-    } else if (this.loginForm.password === '') {
+    if (this.loginForm.username === "") {
+      this.$refs.username.focus();
+    } else if (this.loginForm.password === "") {
       this.$refs.password.focus();
     }
   },
@@ -92,31 +96,32 @@ export default {
   },
   methods: {
     handleShowPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
+      if (this.passwordType === "password") {
+        this.passwordType = "";
       } else {
-        this.passwordType = 'password'
+        this.passwordType = "password";
       }
       this.$nextTick(() => {
-        this.$refs.password.focus()
-      })
+        this.$refs.password.focus();
+      });
     },
 
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true
-          // 开始加载
-          Promise.delay().then(() => {
-            // 异步回调结束 加载
-            this.loading = false
-            // 路由跳转
-          })
+          // this.loading = true;
+          request.post('/oy/user/login', { username: 'admin', password: '123456' }).then(() => null)
+          // // 开始加载
+          // Promise.delay().then(() => {
+          //   // 异步回调结束 加载
+          //   this.loading = false
+          //   // 路由跳转
+          // })
         } else {
-          console.log('error submit!')
-          return false
+          console.log("error submit!");
+          return false;
         }
-      })
+      });
     }
   }
 };
@@ -174,7 +179,7 @@ export default {
       color: #fff;
       margin: 0 auto 40px auto;
       text-align: center;
-      font-weight: bold;;
+      font-weight: bold;
     }
   }
 

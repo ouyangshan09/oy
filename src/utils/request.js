@@ -8,15 +8,16 @@ import qs from 'qs'
 import { Message } from 'element-ui'
 
 const instance = axios.create({
-  baseURL: 'http://192.168.50.192',
+  baseURL: process.env.VUE_APP_NETWORK_URL,
   timeout: 6000,
   paramsSerializer: params => qs.stringify(params),
   validateStatus: status => status >= 200 && status < 300,
 })
 
 instance.interceptors.request.use(
-  config => {
+  (config) => {
     // 如果token存在，则使用填充token值
+    return config
   },
   error => {
     console.log(error)

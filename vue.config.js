@@ -1,10 +1,21 @@
+'use strict'
 const path = require('path')
 
 function resolve(value) {
   return path.resolve(__dirname, value)
 }
 
+const prot = process.env.APP_PORT
+
 module.exports = {
+  devServer: {
+    port: prot || 8080,
+    overlay: {
+      warnings: false,
+      errors: true
+    },
+    before: require('./mock/mock-serve'),
+  },
   configureWebpack: {
     resolve: {
       alias: {
