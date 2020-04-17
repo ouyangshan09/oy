@@ -52,10 +52,6 @@ const responseFake = (url, type, respond) => {
 module.exports = app => {
   require('@babel/register')({
     ignore: [],
-    presets: [
-      '@babel/preset-env',
-    ],
-    extensions: [".es6", ".es", ".jsx", ".js", ".mjs"],
   })
 
   app.use(bodyParser.json())
