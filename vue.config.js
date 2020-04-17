@@ -8,13 +8,15 @@ function resolve(value) {
 const prot = process.env.APP_PORT
 
 module.exports = {
+  lintOnSave: process.env.NODE_ENV === 'development',
+  productionSourceMap: false,
   devServer: {
     port: prot || 8080,
     overlay: {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-serve'),
+    before: require('./mock/mock-server.js'),
   },
   configureWebpack: {
     resolve: {

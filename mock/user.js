@@ -70,4 +70,4 @@ const interfaces = [
   }
 ]
 
-module.exports = interfaces
+export default interfaces

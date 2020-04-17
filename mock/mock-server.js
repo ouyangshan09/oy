@@ -9,9 +9,11 @@ const mockjs = require('mockjs')
 
 const mockDir = path.join(process.cwd(), 'mock')
 
+console.log('mock:', mockDir)
+
 function registerRoutes (app) {
   let mockLastIndex
-  const mocks = require('./index')
+  const { default: mocks } = require('./index')
   const mocksForServer = mocks.map(route => {
     return responseFake(route.url, route.type, route.response)
   })
@@ -48,8 +50,13 @@ const responseFake = (url, type, respond) => {
 
 
 module.exports = app => {
-  // es6 polyfill
-  require('@babel/register')
+  require('@babel/register')({
+    ignore: [],
+    presets: [
+      '@babel/preset-env',
+    ],
+    extensions: [".es6", ".es", ".jsx", ".js", ".mjs"],
+  })
 
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({
@@ -61,7 +68,7 @@ module.exports = app => {
   let mockStartIndex = mockRoutes.mockStartIndex
 
   chokidar.watch(mockDir, {
-    ignored: /mock-serve/,
+    ignored: /mock-server/,
     ignoreInitial: true,
   }).on('all', (event, path) => {
     if (event === 'change' || event === 'add') {
