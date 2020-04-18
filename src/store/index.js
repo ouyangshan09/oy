@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import getters from './getters'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ const modules = moduleFiles.keys().reduce((moduleMap, modulePath) => {
 
 const store = new Vuex.Store({
   modules,
+  getters,
 })
 
 if (process.env.NODE_ENV === 'development' && module.hot) {

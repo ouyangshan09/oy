@@ -6,6 +6,7 @@ import Layout from '../layout'
 Vue.use(Router)
 
 const child1 = { template: '<div>child1</div>' }
+const child2 = { template: '<div>child2</div>' }
 const notFount = { template: '<div>404</div>' }
 
 export const constantRoutes = [
@@ -17,7 +18,31 @@ export const constantRoutes = [
       {
         path: 'home',
         component: child1,
+        meta: {
+          title: 'Home',
+          icon: 'dashboard',
+        }
       },
+    ],
+  },
+  {
+    path: '/menus',
+    component: Layout,
+    meta: {
+      title: '菜单',
+      icon: 'message',
+    },
+    children: [
+      {
+        path: 'menu1',
+        component: child2,
+        meta: { title: 'menu1' }
+      },
+      {
+        path: 'menu2',
+        component: child1,
+        meta: { title: 'menu2' }
+      }
     ],
   },
   {

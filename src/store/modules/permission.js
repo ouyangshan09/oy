@@ -5,7 +5,7 @@
 import { constantRoutes } from '../../routes'
 
 const state = {
-  routes: [],
+  routes: [].concat(constantRoutes),
   addRoutes: [],
 }
 

@@ -22,14 +22,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import SidebarItem from "./SidebarItem";
 
 export default {
   name: "Sidebar",
+  created() {
+  },
   components: {
     SidebarItem
   },
   computed: {
+    ...mapGetters([
+      'permission_routes'
+    ]),
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;
@@ -38,54 +44,6 @@ export default {
       }
       return path;
     },
-    permission_routes() {
-      return [
-        {
-          path: "/a1",
-          meta: {
-            title: "菜单1",
-            icon: "user"
-          },
-          children: [
-            {
-              path: "/a2",
-              meta: {
-                title: "菜单1-1",
-                icon: "user"
-              }
-            },
-            {
-              path: "/a3",
-              meta: {
-                title: "菜单1-1",
-                icon: "user"
-              }
-            },
-            {
-              path: "/a4",
-              meta: {
-                title: "菜单1-1",
-                icon: "user"
-              }
-            },
-            {
-              path: "/a5",
-              meta: {
-                title: "菜单1-1",
-                icon: "user"
-              }
-            }
-          ]
-        },
-        {
-          path: "/b1",
-          meta: {
-            title: "菜单2",
-            icon: "guide"
-          }
-        }
-      ];
-    }
   }
 };
 </script>
