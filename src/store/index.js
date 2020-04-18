@@ -3,22 +3,26 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const moduleFiles = require.context('./modules', true, /\.js$/)
+
+const modules = moduleFiles.keys().reduce((moduleMap, modulePath) => {
+  // 正则过滤参数，拿到模块文件命名
+  const name = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+  // 执行导入拿到模块对象
+  const value = moduleFiles(modulePath)
+  moduleMap[name] = value.default
+  return moduleMap
+}, {})
+
 const store = new Vuex.Store({
-  modules: {
-    A: {
-      state: {
-        name: 'ouyang'
-      }
-    }
-  },
-  getters: {},
+  modules,
 })
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept(['./modules'], () => {
-    const newModules = require('./modules').default
+  const paths = moduleFiles.keys()
+  module.hot.accept(paths, () => {
     store.hotUpdate({
-      modules: newModules,
+      modules: modules,
     })
   })
 }
