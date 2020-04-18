@@ -3,15 +3,14 @@
  * @author ouyang
 */
 
-import router from './routes'
 import Nprogress from 'nprogress'
-import Cookie from 'js-cookie'
+import { Message } from 'element-ui'
+import router from './routes'
+import store from './store'
+import { getPageTitle } from './utils/view'
+import { getToken } from './utils/user'
 
 Nprogress.configure({ showSpinner: false })
-
-const getToken = () => {
-  return Cookie.get('token')
-}
 
 // 路由白名单
 const whiteList = [
@@ -21,6 +20,8 @@ const whiteList = [
 router.beforeEach(async(to, form, next) => {
   Nprogress.start()
 
+  document.title = getPageTitle(to.meta.title)
+
   const hasToken = getToken()
 
   if (hasToken) {
@@ -28,7 +29,22 @@ router.beforeEach(async(to, form, next) => {
       next({ path: '/' })
       Nprogress.done()
     } else {
-      next()
+      const hasRoles = store.getters.roles && store.getters.roles.length > 0
+      if (hasRoles) {
+        next()
+      } else {
+        try {
+          const { roles } = await store.dispatch('user/getInfo')
+          const authorizeRoutes = await store.dispatch('permission/generatorRoutes', roles)
+          router.addRoutes(authorizeRoutes)
+          next({ ...to, replace: true })
+        } catch (e) {
+          await store.dispatch('user/resetToken')
+          Message.error(e || 'Has Error')
+          next(`/login?redirect=${to.path}`)
+          Nprogress.done()
+        }
+      }
     }
   } else {
     if (whiteList.indexOf(to.path) !== -1) {
