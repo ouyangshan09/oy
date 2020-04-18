@@ -46,6 +46,21 @@ export const constantRoutes = [
     ],
   },
   {
+    path: '/icons',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: child1,
+        name: 'Icons',
+        meta: {
+          title: '图标',
+          icon: 'icon',
+        }
+      }
+    ],
+  },
+  {
     path: '/profile',
     component: Layout,
     hidden: true,
