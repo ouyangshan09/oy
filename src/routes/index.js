@@ -19,7 +19,7 @@ export const constantRoutes = [
         path: 'home',
         component: child1,
         meta: {
-          title: 'Home',
+          title: '首页',
           icon: 'dashboard',
         }
       },
@@ -30,7 +30,7 @@ export const constantRoutes = [
     component: Layout,
     meta: {
       title: '菜单',
-      icon: 'message',
+      icon: 'lock',
     },
     children: [
       {

@@ -1,7 +1,7 @@
 #app {
   .sidebar-container {
     transition: width 0.28s;
-    width: 210px;
+    width: $sideBarWidth;
     background-color: #304156;
     height: 100%;
     position: fixed;
@@ -39,12 +39,32 @@
       height: 100%;
       width: 100% !important;
     }
+
+    .submenu-title-noDropdown,
+    .el-submenu__title {
+      &:hover {
+        background-color: $menuHover !important;
+      }
+    }
+
+    .is-active > .el-submenu__title {
+      color: $subMenuActiveText !important;
+    }
+
+    & .el-submenu .el-menu-item {
+      min-width: $sideBarWidth !important;
+      background-color: $subMenuBg !important;
+
+      &:hover {
+        background-color: $subMenuHover !important;
+      }
+    }
   }
 
   .main-container {
     min-height: 100%;
     transition: margin-left .28s;
-    margin-left: 210px;
+    margin-left: $sideBarWidth;
     position: relative;
   }
 }

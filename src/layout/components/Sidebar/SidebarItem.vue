@@ -2,12 +2,14 @@
   <div v-if="!item.hidden">
     <!-- 没有子节点 创建menu-item -->
     <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.alwaysShow">
-      <el-menu-item :index="resolvePath(onlyOneChild.path)">
-        <item
-          :icon="onlyOneChild.meta.icon || (item.meta && item.meta.icon)"
-          :title="onlyOneChild.meta.title"
-        />
-      </el-menu-item>
+      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
+        <el-menu-item :index="resolvePath(onlyOneChild.path)">
+          <item
+            :icon="onlyOneChild.meta.icon || (item.meta && item.meta.icon)"
+            :title="onlyOneChild.meta.title"
+          />
+        </el-menu-item>
+      </app-link>
     </template>
 
     <!-- 有子节点 创建submenu 继续迭代 -->
@@ -29,11 +31,13 @@
 <script>
 import path from "path";
 import Item from "./Item";
+import AppLink from "./Link";
 
 export default {
   name: "SidebarItem",
   components: {
-    Item
+    Item,
+    AppLink
   },
   props: {
     item: {
@@ -45,9 +49,7 @@ export default {
       default: ""
     }
   },
-  created() {
-    console.log("item:", this.item.hidden);
-  },
+  created() {},
   data() {
     this.onlyOneChild = null;
     return {
