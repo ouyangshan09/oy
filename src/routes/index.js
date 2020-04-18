@@ -18,23 +18,27 @@ export const constantRoutes = [
         path: 'home',
         component: child1,
       },
-      {
-        path: 'profile',
-        component: child1,
-      },
-      {
-        path: '404',
-        component: notFount,
-      }
     ],
+  },
+  {
+    path: '/profile',
+    component: Layout,
+    hidden: true,
+  },
+  {
+    path: '/404',
+    component: notFount,
+    hidden: true,
   },
   {
     path: '/login',
     component: Login,
+    hidden: true,
   },
   {
     path: '*',
     component: notFount,
+    hidden: true,
   }
 ]
 
