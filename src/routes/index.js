@@ -8,7 +8,7 @@ Vue.use(Router)
 const child1 = { template: '<div>child1</div>' }
 const notFount = { template: '<div>404</div>' }
 
-const constantRoutes = [
+export const constantRoutes = [
   {
     path: '/',
     component: Layout,
