@@ -63,7 +63,19 @@ export const constantRoutes = [
   {
     path: '/profile',
     component: Layout,
+    redirect: '/profile/index',
     hidden: true,
+    children: [
+      {
+        path: 'index',
+        component: child1,
+        name: 'Profile',
+        meta: {
+          title: '个人信息',
+          icon: 'user'
+        }
+      }
+    ]
   },
   {
     path: '/404',
