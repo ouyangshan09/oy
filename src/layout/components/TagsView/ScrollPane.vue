@@ -34,7 +34,7 @@ export default {
       $scrollWrapper.scrollLeft = $scrollWrapper.scrollLeft + eventDelta / 4;
     },
     /**
-     * 移除Tag
+     * 移除Tag后 视图需要位移的位置计算
     */
     moveToTarget(currentTag) {
       const $container = this.$refs.scrollContainer.$el;

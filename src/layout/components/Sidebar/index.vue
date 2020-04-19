@@ -8,6 +8,7 @@
         :active-text-color="'#409EFF'"
         :unique-opened="false"
         :collapse-transition="false"
+        :collapse="false"
         mode="vertical"
       >
         <sidebar-item
