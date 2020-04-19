@@ -87,7 +87,7 @@ export default {
 
   ::v-deep {
     .el-scrollbar__bar {
-      bottom: 0px;
+      bottom: -3px;
     }
     .el-scrollbar__wrap {
       height: 49px;
