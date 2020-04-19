@@ -4,8 +4,8 @@
     <div class="main-container">
       <!-- 工具栏 -->
       <div class="header">
-        <Navbar />
-        <div>tags-view</div>
+        <navbar />
+        <tags-view />
       </div>
       <!-- 路由入口 -->
       <app-main />
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { AppMain, Sidebar, Navbar } from './components'
+import { AppMain, Sidebar, Navbar, TagsView } from './components'
 
 export default {
   name: 'Layout',
@@ -22,6 +22,7 @@ export default {
     AppMain,
     Sidebar,
     Navbar,
+    TagsView,
   },
   mixins: [],
   computed: {
