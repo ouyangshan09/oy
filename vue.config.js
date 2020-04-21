@@ -32,7 +32,7 @@ module.exports = {
     config.module
       .rule('svg')
       .exclude.add(resolve('src/icons'))
-      .end(
+      .end()
     config.module
       .rule('icons')
       .test(/\.svg$/)
