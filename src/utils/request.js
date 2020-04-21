@@ -34,14 +34,14 @@ instance.interceptors.response.use(
         type: 'error',
         duration: 5 * 1000,
       })
-
       // 处理其它情况 登出，过期、重新登录
+
+      return Promise.reject(data.message || 'Error')
     } else {
       return data
     }
   },
   error => {
-    console.log('response error:', error)
     Message({
       message: error.message,
       type: 'error',

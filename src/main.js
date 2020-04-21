@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './App'
 import router from './routes'
 import store from './store'
 import 'normalize.css/normalize.css'

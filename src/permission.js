@@ -33,19 +33,17 @@ router.beforeEach(async(to, form, next) => {
       if (hasRoles) {
         next()
       } else {
-        console.log('123123')
-        // try {
-        //   const { roles } = await store.dispatch('user/getInfo')
-        //   const authorizeRoutes = await store.dispatch('permission/generatorRoutes', roles)
-        //   router.addRoutes(authorizeRoutes)
-        //   next({ ...to, replace: true })
-        // } catch (e) {
-        //   await store.dispatch('user/resetToken')
-        //   Message.error(e || 'Has Error')
-        //   next(`/login?redirect=${to.path}`)
-        //   Nprogress.done()
-        // }
-        next()
+        try {
+          const { roles } = await store.dispatch('user/getInfo')
+          const authorizeRoutes = await store.dispatch('permission/generatorRoutes', roles)
+          router.addRoutes(authorizeRoutes)
+          next({ ...to, replace: true })
+        } catch (e) {
+          await store.dispatch('user/resetToken')
+          Message.error(e || 'Has Error')
+          next(`/login?redirect=${to.path}`)
+          Nprogress.done()
+        }
       }
     }
   } else {

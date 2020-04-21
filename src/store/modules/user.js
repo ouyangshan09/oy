@@ -2,7 +2,7 @@
  * 用户数据管理
  * @author ouyang
 */
-import { login } from '../../api/user'
+import { login, getInfo } from '../../api/user'
 import { setToken } from '../../utils/user'
 
 const state = {
@@ -35,8 +35,15 @@ const actions = {
       })
     })
   },
-  getInfo() {
-    return Promise.resolve({ roles: ['admin'] })
+  getInfo({ commit }) {
+    return new Promise((resolve, reject) => {
+      getInfo().then(response => {
+        commit('SET_ROLES', response.data)
+        resolve(response.data)
+      }).catch(reason => {
+        reject(reason)
+      })
+    })
   },
   resetToken({ commit }) {
     return new Promise(resolve => {
