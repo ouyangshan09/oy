@@ -36,7 +36,7 @@ instance.interceptors.response.use(
       })
       // 处理其它情况 登出，过期、重新登录
 
-      return Promise.reject(data.message || 'Error')
+      return Promise.reject(new Error(data.message || 'Error'))
     } else {
       return data
     }

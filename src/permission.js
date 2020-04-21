@@ -4,7 +4,6 @@
 */
 
 import Nprogress from 'nprogress'
-import { Message } from 'element-ui'
 import router from './routes'
 import store from './store'
 import { getPageTitle } from './utils/view'
@@ -40,8 +39,7 @@ router.beforeEach(async(to, form, next) => {
           next({ ...to, replace: true })
         } catch (e) {
           await store.dispatch('user/resetToken')
-          Message.error(e || 'Has Error')
-          next(`/login?redirect=${to.path}`)
+          next(false)
           Nprogress.done()
         }
       }
@@ -58,4 +56,7 @@ router.beforeEach(async(to, form, next) => {
 
 router.afterEach(() => {
   Nprogress.done()
+})
+
+router.onError(() => {
 })
