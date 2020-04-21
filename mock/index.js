@@ -1,7 +1,7 @@
-import user from './user'
+const user = require('./user')
 
 const mocks = [
   ...user,
 ]
 
-export default mocks
+module.exports = mocks

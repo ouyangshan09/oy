@@ -13,7 +13,7 @@ console.log('mock:', mockDir)
 
 function registerRoutes (app) {
   let mockLastIndex
-  const { default: mocks } = require('./index')
+  const mocks = require('./index')
   const mocksForServer = mocks.map(route => {
     return responseFake(route.url, route.type, route.response)
   })
@@ -48,12 +48,7 @@ const responseFake = (url, type, respond) => {
   }
 }
 
-
 module.exports = app => {
-  require('@babel/register')({
-    ignore: [],
-  })
-
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({
     extended: true,

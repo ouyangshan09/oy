@@ -43,12 +43,14 @@ const interfaces = [
     type: 'get',
     response: res => {
       const { token } = res.query
+      console.log('service query:', res.query)
       const info = infoData[token]
 
       if (!info) {
         return {
           code: 40002,
           message: '查询失败',
+          data: null,
         }
       }
 
@@ -70,4 +72,4 @@ const interfaces = [
   }
 ]
 
-export default interfaces
+module.exports = interfaces
