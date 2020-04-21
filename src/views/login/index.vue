@@ -53,8 +53,6 @@
 </template>
 
 <script>
-import request from "../../utils/request";
-
 export default {
   name: "Login",
   data() {
@@ -109,14 +107,13 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          // this.loading = true;
-          request.post('/oy/user/login', { username: 'admin', password: '123456' }).then(() => null)
-          // // 开始加载
-          // Promise.delay().then(() => {
-          //   // 异步回调结束 加载
-          //   this.loading = false
-          //   // 路由跳转
-          // })
+          this.loading = true
+          this.$store.dispatch('user/login', this.loginForm).then(() => {
+            this.$router.push({ path: this.redirect || '/', query: this.queryJson })
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
         } else {
           console.log("error submit!");
           return false;

@@ -18,7 +18,7 @@ const infoData = {
 
 const interfaces = [
   {
-    url: '/oy/user/login',
+    url: '/user/login',
     type: 'post',
     response: res => {
       const { username } = res.body
@@ -39,7 +39,7 @@ const interfaces = [
     }
   },
   {
-    url: '/oy/user/info',
+    url: '/user/info',
     type: 'get',
     response: res => {
       const { token } = res.query
@@ -59,7 +59,7 @@ const interfaces = [
     },
   },
   {
-    url: '/oy/user/logout',
+    url: '/user/logout',
     type: 'put',
     response: res => {
       return {

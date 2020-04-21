@@ -5,7 +5,7 @@ import store from './store'
 import 'normalize.css/normalize.css'
 import './styles/index.scss'
 import './icons'
-// import './permission'
+import './permission'
 import './plugins/element.js'
 import './polyfill'
 

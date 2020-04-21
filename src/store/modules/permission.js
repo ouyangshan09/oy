@@ -19,7 +19,7 @@ const mutations = {
 const actions = {
   generatorRoutes() {
     return new Promise(resolve => {
-      return resolve()
+      return resolve([])
     })
   }
 }
