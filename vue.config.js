@@ -26,13 +26,13 @@ module.exports = {
     }
   },
   chainWebpack: (config) => {
-    config.resolve.alias
-      .set('vue$', 'vue/dist/vue.esm.js')
+    // config.resolve.alias
+    //   .set('vue$', 'vue/dist/vue.esm.js')
 
     config.module
       .rule('svg')
       .exclude.add(resolve('src/icons'))
-      .end()
+      .end(
     config.module
       .rule('icons')
       .test(/\.svg$/)
