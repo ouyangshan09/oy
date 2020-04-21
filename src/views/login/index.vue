@@ -81,6 +81,18 @@ export default {
       queryJson: {}
     };
   },
+  watch: {
+    $route: {
+      handler: function(route) {
+        const query = route.query
+        if (query) {
+          this.redirect = query.redirect
+          this.queryJson = this.getOtherQuery(query)
+        }
+      },
+      immediate: true,
+    },
+  },
   created() {},
   mounted() {
     if (this.loginForm.username === "") {
@@ -119,6 +131,15 @@ export default {
           return false;
         }
       });
+    },
+
+    getOtherQuery(value) {
+      return Object.keys(value).reduce((acc, key) => {
+        if (key !== 'redirect') {
+          acc[key] = value[key]
+        }
+        return acc
+      }, {})
     }
   }
 };
