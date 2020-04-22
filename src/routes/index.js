@@ -9,7 +9,10 @@ const child1 = { template: '<div>child1</div>' }
 const child2 = { template: '<div>child2</div>' }
 const notFount = { template: '<div>404</div>' }
 
-export const constantRoutes = [
+/**
+ * 公共路由页面
+*/
+export const publicRoutes = [
   {
     path: '/',
     component: Layout,
@@ -94,8 +97,13 @@ export const constantRoutes = [
   }
 ]
 
+/**
+ * 授权路由页面，需要用户自生的角色来创建
+*/
+export const authorizeRoutes = []
+
 const router = new Router({
-  routes: constantRoutes,
+  routes: publicRoutes,
   mode: 'history',
 })
 
