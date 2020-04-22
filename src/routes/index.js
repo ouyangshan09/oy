@@ -96,6 +96,7 @@ export const constantRoutes = [
 
 const router = new Router({
   routes: constantRoutes,
+  mode: 'history',
 })
 
 export default router

@@ -11,5 +11,5 @@ export function setToken(value) {
 }
 
 export function removeToken(value) {
-  return Cookies.remove(value)
+  return Cookies.remove(value || TokenKey)
 }

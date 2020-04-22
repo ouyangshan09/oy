@@ -3,7 +3,7 @@
  * @author ouyang
 */
 import { login, getInfo } from '../../api/user'
-import { setToken } from '../../utils/user'
+import { setToken, removeToken } from '../../utils/user'
 
 const state = {
   token: '',
@@ -16,6 +16,9 @@ const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
     setToken(token)
+    if (token === '') {
+      removeToken()
+    }
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
@@ -38,11 +41,17 @@ const actions = {
   getInfo({ commit }) {
     return new Promise((resolve, reject) => {
       getInfo().then(response => {
-        commit('SET_ROLES', response.data)
+        commit('SET_ROLES', response.data.roles)
         resolve(response.data)
       }).catch(reason => {
         reject(reason)
       })
+    })
+  },
+  logout({ dispatch }) {
+    return new Promise(resolve => {
+      dispatch('resetToken')
+      resolve()
     })
   },
   resetToken({ commit }) {

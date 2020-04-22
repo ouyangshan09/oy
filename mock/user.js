@@ -42,8 +42,8 @@ const interfaces = [
     url: '/user/info',
     type: 'get',
     response: res => {
-      const { token } = res.query
-      console.log('service query:', res.query)
+      // console.log('service query:', res)
+      const token = res.headers.token
       const info = infoData[token]
 
       if (!info) {
@@ -56,7 +56,8 @@ const interfaces = [
 
       return {
         code: 0,
-        data: info
+        data: info,
+        message: 'success',
       }
     },
   },

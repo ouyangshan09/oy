@@ -64,7 +64,8 @@ export default {
     },
 
     onLogout() {
-      console.log9('退出')
+      this.$store.dispatch('user/logout')
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
 };
