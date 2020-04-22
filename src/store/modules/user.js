@@ -3,10 +3,10 @@
  * @author ouyang
 */
 import { login, getInfo } from '../../api/user'
-import { setToken, removeToken } from '../../utils/user'
+import { setToken, removeToken, getToken } from '../../utils/user'
 
 const state = {
-  token: '',
+  token: getToken(),
   name: '',
   avatar: '',
   roles: [],

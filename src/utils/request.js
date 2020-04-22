@@ -7,6 +7,7 @@ import axios from 'axios'
 import qs from 'qs'
 import { Message } from 'element-ui'
 import { getToken } from './user'
+import store from '../store'
 
 const instance = axios.create({
   baseURL: process.env.VUE_APP_NETWORK_URL,
@@ -18,9 +19,9 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     // 如果token存在，则使用填充token值
-    const token = getToken()
+    const token = store.getters.token
     if (token) {
-      config.headers['token'] = token
+      config.headers['token'] = getToken()
     }
     return config
   },
