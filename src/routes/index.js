@@ -100,7 +100,30 @@ export const publicRoutes = [
 /**
  * 授权路由页面，需要用户自生的角色来创建
 */
-export const authorizeRoutes = []
+export const authorizeRoutes = [
+  {
+    path: '/permission',
+    redirect: '/permission/menu',
+    component: Layout,
+    name: 'Permission',
+    meta: {
+      title: '权限',
+      icon: 'lock',
+      roles: ['admin'],
+    },
+    children: [
+      {
+        path: 'menu',
+        component: child1,
+        name: 'MenuPermission',
+        meta: {
+          title: '菜单权限',
+          roles: ['admin'],
+        }
+      }
+    ],
+  }
+]
 
 const router = new Router({
   routes: publicRoutes,
