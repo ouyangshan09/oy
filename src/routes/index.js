@@ -2,12 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../views/login'
 import Layout from '../layout'
+import Page1 from '../views/page1'
 
 Vue.use(Router)
-
-const child1 = { template: '<div>child1</div>' }
-const child2 = { template: '<div>child2</div>' }
-const notFount = { template: '<div>404</div>' }
 
 /**
  * 公共路由页面
@@ -20,7 +17,7 @@ export const publicRoutes = [
     children: [
       {
         path: 'home',
-        component: child1,
+        component: Page1,
         meta: {
           title: '首页',
           icon: 'dashboard',
@@ -38,12 +35,12 @@ export const publicRoutes = [
     children: [
       {
         path: 'menu1',
-        component: child2,
+        component: Page1,
         meta: { title: 'menu1' }
       },
       {
         path: 'menu2',
-        component: child1,
+        component: Page1,
         meta: { title: 'menu2' }
       }
     ],
@@ -54,7 +51,7 @@ export const publicRoutes = [
     children: [
       {
         path: 'index',
-        component: child1,
+        component: Page1,
         name: 'Icons',
         meta: {
           title: '图标',
@@ -71,7 +68,7 @@ export const publicRoutes = [
     children: [
       {
         path: 'index',
-        component: child1,
+        component: Page1,
         name: 'Profile',
         meta: {
           title: '个人信息',
@@ -82,7 +79,7 @@ export const publicRoutes = [
   },
   {
     path: '/404',
-    component: notFount,
+    component: Page1,
     hidden: true,
   },
   {
@@ -92,7 +89,7 @@ export const publicRoutes = [
   },
   {
     path: '*',
-    component: notFount,
+    component: Page1,
     hidden: true,
   }
 ]
@@ -114,7 +111,7 @@ export const authorizeRoutes = [
     children: [
       {
         path: 'menu',
-        component: child1,
+        component: Page1,
         name: 'MenuPermission',
         meta: {
           title: '菜单权限',
@@ -125,9 +122,20 @@ export const authorizeRoutes = [
   }
 ]
 
-const router = new Router({
+const createRouter = () => new Router({
   routes: publicRoutes,
   mode: 'history',
 })
+
+const router =createRouter()
+
+/**
+ * 重置路由
+*/
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher
+}
+
 
 export default router
