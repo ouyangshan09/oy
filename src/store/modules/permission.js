@@ -17,8 +17,9 @@ const mutations = {
 }
 
 const actions = {
-  generatorRoutes() {
+  generatorRoutes(store, payload) {
     return new Promise(resolve => {
+      // TODO 根据角色创建对应的菜单权限
       resolve(['test1', 'test2'])
     })
   }
