@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="left">
       <div class="hamburger-container" @click="onToggleSidebar">
-        <svg-icon icon-class="hamburger" :class-name="sidebar ? 'is-active' : ''" />
+        <svg-icon icon-class="hamburger" :class-name="sidebar.opened ? 'is-active' : ''" />
       </div>
       <div class="breadcrumb-container">
         <el-breadcrumb separator="/">
@@ -45,13 +45,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: "Navbar",
   components: {},
   computed: {
-    sidebar() {
-      return this.isActive;
-    }
+    ...mapGetters([
+      'sidebar',
+    ]),
   },
   data() {
     return {
@@ -60,7 +62,7 @@ export default {
   },
   methods: {
     onToggleSidebar() {
-      this.isActive = !this.isActive;
+      this.$store.dispatch('app/toggleSidebar')
     },
 
     onLogout() {
