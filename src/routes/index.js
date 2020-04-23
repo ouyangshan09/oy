@@ -17,10 +17,12 @@ export const publicRoutes = [
     children: [
       {
         path: 'home',
+        name: 'Home',
         component: Page1,
         meta: {
           title: '首页',
           icon: 'dashboard',
+          affix: true,
         }
       },
     ],
@@ -56,6 +58,7 @@ export const publicRoutes = [
         meta: {
           title: '图标',
           icon: 'icon',
+          affix: true,
         }
       }
     ],

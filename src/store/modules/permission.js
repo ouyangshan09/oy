@@ -52,7 +52,6 @@ const mutations = {
 const actions = {
   generatorRoutes({ commit }, payload) {
     return new Promise(resolve => {
-      // TODO 根据角色创建对应的菜单权限
       let routes = []
       if (payload.includes('admin')) {
         routes = authorizeRoutes || []
