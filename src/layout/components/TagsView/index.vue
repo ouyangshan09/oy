@@ -13,7 +13,7 @@
         @contextmenu.prevent.native="openMenu(tag, $event)"
       >
         {{ tag.title }}
-        <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeTag(selectedTag)" />
+        <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeTag(tag)" />
       </router-link>
     </scroll-pane>
     <ul v-show="visible" :style="{left: left + 'px', top: top + 'px'}" class="contextmenu">
@@ -136,17 +136,40 @@ export default {
     },
     // 关闭tag的路由
     closeTag(view) {
-      console.log("关闭当前view:", view);
+      this.$store.dispatch('tagsView/deleteView', view).then(({ visitedViews }) => {
+        if (this.isActive(view)) {
+          this.toLastView(visitedViews, view)
+        }
+      })
       return view;
     },
     // 关闭其它tag路由
     closeOthersTags() {
+      this.$router.push(this.selectedTag, () => null)
+      this.$store.dispatch('tagsView/deleteOthersView', this.selectedTag).then(() => {
+        this.moveToCurrentTag()
+      })
       console.log("关闭其它View");
     },
     // 关闭所有tag路由
     closeAllTag(view) {
       console.log("关闭所有view");
+      this.$store.dispatch('tagsView/deleteAllView').then(({ visitedViews }) => {
+        if (this.affixTags.some(tag => tag.path === view.path)) {
+          return
+        }
+        this.toLastView(visitedViews, view)
+      })
       return view;
+    },
+    toLastView(visitedViews, view) {
+      const lastView = visitedViews.slice(-1)[0]
+      if (lastView) {
+        this.$router.push(lastView.fullPath)
+      } else {
+        console.warn('可访问视图组:', visitedViews, '当前视图:', view)
+        // 如果没有最后一个则跳转根路由 '/'
+      }
     },
     /**
      * 动态计算Menu位置
