@@ -132,6 +132,14 @@ export default {
     // 刷新tag的路由
     onRefreshTag(view) {
       console.log("刷新当前view:", view);
+      this.$store.dispatch('tagsView/deleteCacheView', view).then(() => {
+        const { fullPath } = view
+        this.$nextTick(() => {
+          this.$router.replace({
+            path: '/redirect' + fullPath
+          })
+        })
+      })
       return view;
     },
     // 关闭tag的路由

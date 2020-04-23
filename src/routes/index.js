@@ -4,6 +4,7 @@ import Login from '../views/login'
 import Layout from '../layout'
 import Page1 from '../views/page1'
 import Page2 from '../views/page2'
+import Redirect from '../views/redirect'
 
 Vue.use(Router)
 
@@ -11,6 +12,17 @@ Vue.use(Router)
  * 公共路由页面
 */
 export const publicRoutes = [
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: Redirect,
+      }
+    ]
+  },
   {
     path: '/',
     component: Layout,
