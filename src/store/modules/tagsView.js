@@ -25,6 +25,14 @@ const mutations = {
     if (!view.meta.noCache) {
       state.cacheViews.push(view.name)
     }
+  },
+  UPDATE_VISITED_VIEW: (state, view) => {
+    for (let v of state.visitedViews) {
+      if (v.path === view.path) {
+        v = Object.assign(v, view)
+        break
+      }
+    }
   }
 }
 
@@ -50,8 +58,8 @@ const actions = {
     dispatch('addVisitedView', payload)
     dispatch('addCacheView', payload)
   },
-  updateView() {
-    //
+  updateVisitedView({ commit }, payload) {
+    commit('UPDATE_VISITED_VIEW', payload)
   },
   deleteView() {
     //

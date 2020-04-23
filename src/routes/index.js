@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '../views/login'
 import Layout from '../layout'
 import Page1 from '../views/page1'
+import Page2 from '../views/page2'
 
 Vue.use(Router)
 
@@ -37,12 +38,14 @@ export const publicRoutes = [
     children: [
       {
         path: 'menu1',
+        name: 'menu1',
         component: Page1,
         meta: { title: 'menu1' }
       },
       {
         path: 'menu2',
-        component: Page1,
+        name: 'menu2',
+        component: Page2,
         meta: { title: 'menu2' }
       }
     ],
@@ -71,7 +74,7 @@ export const publicRoutes = [
     children: [
       {
         path: 'index',
-        component: Page1,
+        component: Page2,
         name: 'Profile',
         meta: {
           title: '个人信息',

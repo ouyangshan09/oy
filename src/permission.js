@@ -3,13 +3,14 @@
  * @author ouyang
 */
 
+import 'nprogress/nprogress.css'
 import Nprogress from 'nprogress'
 import router from './routes'
 import store from './store'
 import { getPageTitle } from './utils/view'
 import { getToken } from './utils/user'
 
-Nprogress.configure({ showSpinner: false })
+Nprogress.configure({ showSpinner: true })
 
 // 路由白名单
 const whiteList = [

@@ -13,7 +13,7 @@
         @contextmenu.prevent.native="openMenu(tag, $event)"
       >
         {{ tag.title }}
-        <span v-if="!isAffix(tag)" class="el-icon-close" />
+        <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeTag(selectedTag)" />
       </router-link>
     </scroll-pane>
     <ul v-show="visible" :style="{left: left + 'px', top: top + 'px'}" class="contextmenu">
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import path from 'path'
+import path from "path";
 import ScrollPane from "./ScrollPane";
 
 export default {
@@ -40,21 +40,21 @@ export default {
       top: 0,
       left: 0,
       selectedTag: {},
-      affixTags: [],
+      affixTags: []
     };
   },
   computed: {
     visiedViews() {
-      return this.$store.state.tagsView.visitedViews
+      return this.$store.state.tagsView.visitedViews;
     },
     routes() {
-      return this.$store.state.permission.routes
+      return this.$store.state.permission.routes;
     }
   },
   watch: {
     $route() {
-      this.addTags()
-      this.moveToCurrentTag()
+      this.addTags();
+      this.moveToCurrentTag();
     },
     visible(value) {
       if (value) {
@@ -65,58 +65,63 @@ export default {
     }
   },
   mounted() {
-    this.initTags()
-    this.addTags()
+    this.initTags();
+    this.addTags();
   },
   methods: {
     // 初始化视图，从路由中创建tags数据
     initTags() {
-      const affixTags = this.affixTags = this.filterAffixTags(this.routes)
-      const filterInExistNameFromTags = affixTags.filter(tag => !!tag.name)
-      this.$store.dispatch('tagsView/addVisitedView', filterInExistNameFromTags)
-
+      const affixTags = (this.affixTags = this.filterAffixTags(this.routes));
+      const filterInExistNameFromTags = affixTags.filter(tag => !!tag.name);
+      this.$store.dispatch(
+        "tagsView/addVisitedView",
+        filterInExistNameFromTags
+      );
     },
     // 添加当前路由到tags数据中
     addTags() {
-      const { name } = this.$route
+      const { name } = this.$route;
       if (name) {
-        this.$store.dispatch('tagsView/addView', this.$route)
-        return true
+        this.$store.dispatch("tagsView/addView", this.$route);
+        return true;
       }
-      return false
+      return false;
     },
     // 移动到当前路由的tag
     moveToCurrentTag() {
-      const tags = this.$refs.tag
+      const tags = this.$refs.tag;
       this.$nextTick(() => {
         for (const tag of tags) {
-          if (tag.path !== this.$route.fullPath) {
-            // TODO 更新路由
+          if (tag.to.path === this.$route.path) {
+            this.$refs.scrollPane.moveToTarget(tag)
+            if (tag.to.fullPath !== this.$route.fullPath) {
+              this.$store.dispatch("tagsView/updateVisitedView", this.$route);
+            }
+            break
           }
-          break
         }
-      })
+      });
     },
-    filterAffixTags(routes, basePath = '/') {
-      let tags = []
+    filterAffixTags(routes, basePath = "/") {
+      let tags = [];
       routes.forEach(route => {
         if (route.meta && route.meta.affix) {
-          const tagPath = path.resolve(basePath, route.path)
+          const tagPath = path.resolve(basePath, route.path);
           tags.push({
             fullPath: tagPath,
             path: tagPath,
             name: route.name,
             meta: { ...route.meta }
-          })
+          });
         }
         if (route.children) {
-          const tempTags = this.filterAffixTags(route.children, route.path)
+          const tempTags = this.filterAffixTags(route.children, route.path);
           if (tempTags.length >= 1) {
-            tags = [...tags, ...tempTags]
+            tags = [...tags, ...tempTags];
           }
         }
-      })
-      return tags
+      });
+      return tags;
     },
     isActive(route) {
       return route.path === this.$route.path;

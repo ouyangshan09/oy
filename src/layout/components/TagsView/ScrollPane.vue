@@ -34,13 +34,14 @@ export default {
       $scrollWrapper.scrollLeft = $scrollWrapper.scrollLeft + eventDelta / 4;
     },
     /**
+     * 当横向滚动条过长，需要自动位移滚动条
      * 移除Tag后 视图需要位移的位置计算
     */
     moveToTarget(currentTag) {
       const $container = this.$refs.scrollContainer.$el;
       const $containerWidth = $container.offsetWidth;
       const $scrollWraper = this.scrollWraper;
-      const tagList = this.$$parent.$refs.tag;
+      const tagList = this.$parent.$refs.tag;
 
       let firstTag = null;
       let lastTag = null;
