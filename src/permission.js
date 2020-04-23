@@ -10,7 +10,7 @@ import store from './store'
 import { getPageTitle } from './utils/view'
 import { getToken } from './utils/user'
 
-Nprogress.configure({ showSpinner: true })
+Nprogress.configure({ showSpinner: false })
 
 // 路由白名单
 const whiteList = [
