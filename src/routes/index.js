@@ -140,6 +140,58 @@ export const authorizeRoutes = [
         }
       }
     ],
+  },
+  {
+    path: '/table',
+    name: 'Table',
+    redirect: '/table/normal-table',
+    component: Layout,
+    meta: {
+      title: '表格',
+      icon: 'table',
+    },
+    children: [
+      {
+        path: 'normal-table',
+        component: () => import('../views/table/normal-table'),
+        name: 'NormalTable',
+        meta: {
+          title: '普通表格',
+        },
+      },
+      {
+        path: 'drag-table',
+        component: Page1,
+        name: 'DragTable',
+        meta: {
+          title: '拖动表格',
+        },
+      },
+      {
+        path: 'dynamic-table',
+        component: Page1,
+        name: 'DynamicTable',
+        meta: {
+          title: '动态表格'
+        },
+      },
+      {
+        path: 'inline-edit-table',
+        component: Page1,
+        name: 'InlineEditTable',
+        meta: {
+          title: '内联行编辑表格',
+        },
+      },
+      {
+        path: 'condition-table',
+        component: Page1,
+        name: 'ConditionTable',
+        meta: {
+          title: '多条件查询表格',
+        },
+      }
+    ]
   }
 ]
 
