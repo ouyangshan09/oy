@@ -4,19 +4,7 @@
       <div class="hamburger-container" @click="onToggleSidebar">
         <svg-icon icon-class="hamburger" :class-name="sidebar.opened ? 'is-active' : ''" />
       </div>
-      <div class="breadcrumb-container">
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item key="1">
-            <span>首页</span>
-          </el-breadcrumb-item>
-          <el-breadcrumb-item key="2">
-            <span>菜单</span>
-          </el-breadcrumb-item>
-          <el-breadcrumb-item key="3">
-            <span>子菜单</span>
-          </el-breadcrumb-item>
-        </el-breadcrumb>
-      </div>
+      <breadcrumb class="breadcrumb-container" />
     </div>
     <div class="right-menu">
       <div class="right-menu-item">
@@ -46,10 +34,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Breadcrumb from '../../components/Breadcrumb'
 
 export default {
   name: "Navbar",
-  components: {},
+  components: {
+    Breadcrumb,
+  },
   computed: {
     ...mapGetters([
       'sidebar',
