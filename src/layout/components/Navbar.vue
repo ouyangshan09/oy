@@ -7,12 +7,15 @@
       <breadcrumb class="breadcrumb-container" />
     </div>
     <div class="right-menu">
+      <!-- 大屏控制 -->
       <div class="right-menu-item">
         <svg-icon icon-class="fullscreen" />
       </div>
+      <!-- 多语音 -->
       <div class="right-menu-item">
         <svg-icon icon-class="language" />
       </div>
+      <!-- 用户菜单 -->
       <el-dropdown class="avatar-container right-menu-item">
         <div class="avatar-wrapper">
           <img src="../../assets/user-avatar.jpg" class="user-avatar" />
