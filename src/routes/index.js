@@ -5,6 +5,7 @@ import Layout from '../layout'
 import Page1 from '../views/page1'
 import Page2 from '../views/page2'
 import Redirect from '../views/redirect'
+// import Home from '../views/home'
 
 Vue.use(Router)
 
@@ -31,7 +32,7 @@ export const publicRoutes = [
       {
         path: 'home',
         name: 'Home',
-        component: Page1,
+        component: () => import('../views/home'),
         meta: {
           title: '首页',
           icon: 'dashboard',
