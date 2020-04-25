@@ -43,6 +43,7 @@ export const publicRoutes = [
   {
     path: '/menus',
     component: Layout,
+    redirect: 'noRedirect',
     meta: {
       title: '菜单',
       icon: 'lock',
@@ -118,7 +119,8 @@ export const publicRoutes = [
 export const authorizeRoutes = [
   {
     path: '/permission',
-    redirect: '/permission/menu',
+    // redirect: '/permission/menu',
+    redirect: 'noRedirect',
     component: Layout,
     name: 'Permission',
     meta: {

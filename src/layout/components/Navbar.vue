@@ -80,7 +80,7 @@ export default {
     cursor: pointer;
     transition: background 0.3s;
     height: 100%;
-    line-height: 50px;
+    line-height: 46px;
     padding: 0 16px;
 
     .svg-icon {
@@ -100,6 +100,7 @@ export default {
 
   .breadcrumb-container {
     display: inline-block;
+    vertical-align: bottom;
     margin-left: 8px;
     line-height: 50px;
   }

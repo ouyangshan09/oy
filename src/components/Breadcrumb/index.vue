@@ -1,8 +1,9 @@
 <template>
   <el-breadcrumb class="app-breadcrumb">
     <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item) in levelList" :key="item.path">
-        <span @click.prevent="handleRouteLink(item)">{{ item.meta.title }}</span>
+      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
+        <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect">{{ item.meta.title }}</span>
+        <a v-else @click.prevent="handleRouteLink(item)">{{ item.meta.title }}</a>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
@@ -40,9 +41,12 @@ export default {
       this.levelList = matched.filter(route => route.meta && route.meta.title && route.meta.breadcrumb !== false)
     },
     handleRouteLink(route) {
-      const path = this.pathCompile(route.path)
-      console.log('native path to:', path)
-      console.log('native route to:', route)
+      const { path, redirect } = route
+      if (redirect) {
+        this.$router.push(redirect, () => null)
+        return
+      }
+      this.$router.push(path, () => null)
     },
     pathCompile(path) {
       const { params } = this.$route
@@ -70,6 +74,11 @@ export default {
   .no-redirect {
     color: #97a8be;
     cursor: text;
+  }
+
+  .el-breadcrumb__inner a,
+  .el-breadcrumb__inner.is-link {
+    font-weight: 400;
   }
 }
 </style>
