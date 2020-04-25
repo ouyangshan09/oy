@@ -5,7 +5,7 @@
 
 const state = {
   sidebar: {
-    opened: !localStorage.getItem('sidebarState'),
+    opened: localStorage.getItem('sidebarState') ? !!+localStorage.getItem('sidebarState') : true,
     withoutAnimation: false,
   },
   device: 'desktop',
@@ -17,13 +17,13 @@ const mutations = {
     state.sidebar.opened = !state.sidebar.opened
     state.sidebar.withoutAnimation = false
     if (state.sidebar.opened) {
-      localStorage.setItem('sidebarState', true)
+      localStorage.setItem('sidebarState', 1)
     } else {
-      localStorage.setItem('sidebarState', false)
+      localStorage.setItem('sidebarState', 0)
     }
   },
   CLOSE_SIDEBAR: (state, withoutAnimation) => {
-    localStorage.setItem('sidebarState', false)
+    localStorage.setItem('sidebarState', 0)
     state.sidebar.opened = false
     state.sidebar.withoutAnimation = withoutAnimation
   },
