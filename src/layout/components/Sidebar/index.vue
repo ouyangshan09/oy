@@ -8,7 +8,7 @@
         :active-text-color="'#409EFF'"
         :unique-opened="false"
         :collapse-transition="false"
-        :collapse="false"
+        :collapse="isCollapse"
         mode="vertical"
       >
         <sidebar-item
@@ -35,7 +35,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'permission_routes'
+      'permission_routes',
+      'sidebar',
     ]),
     activeMenu() {
       const route = this.$route;
@@ -45,6 +46,9 @@ export default {
       }
       return path;
     },
+    isCollapse() {
+      return !this.sidebar.opened
+    }
   }
 };
 </script>

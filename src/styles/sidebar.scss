@@ -67,4 +67,29 @@
     margin-left: $sideBarWidth;
     position: relative;
   }
+
+  .hide-sidebar {
+    .sidebar-container {
+      width: $sideBarCollapseWidth;
+    }
+
+    .el-menu {
+      .el-submenu {
+        & > .el-submenu__title {
+          span,
+          .el-submenu__icon-arrow {
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            visibility: hidden;
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    .main-container {
+      margin-left: $sideBarCollapseWidth;
+    }
+  }
 }

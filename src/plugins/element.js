@@ -16,6 +16,7 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  Tooltip
 } from 'element-ui'
 // import Scrollbar from 'element-ui/packages/scrollbar'
 // import ElementUI from 'element-ui';
@@ -34,6 +35,7 @@ Vue.use(BreadcrumbItem)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
+Vue.use(Tooltip)
 Vue.use(Loading.directive)
 
 Vue.prototype.$loading = Loading.service

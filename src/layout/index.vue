@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { AppMain, Sidebar, Navbar, TagsView } from './components'
 
 export default {
@@ -26,9 +27,13 @@ export default {
   },
   mixins: [],
   computed: {
+    ...mapGetters([
+      'sidebar',
+    ]),
     classObj(){
       return {
-        //
+        'hide-sidebar': !this.sidebar.opened,
+        'open-sidebar': this.sidebar.opened,
       }
     }
   },

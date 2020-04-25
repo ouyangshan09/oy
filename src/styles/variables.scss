@@ -1,4 +1,5 @@
 $sideBarWidth: 210px;
+$sideBarCollapseWidth: 56px;
 
 $menuBg:#304156;
 $menuHover: #263445;
@@ -10,6 +11,7 @@ $subMenuActiveText: #f4f4f5;
 
 :export {
   sideBarWidth: $sideBarWidth;
+  sideBarCollapseWidth: $sideBarCollapseWidth;
   menuBg: $menuBg;
   menuHover: $menuHover;
   subMenuBg: $subMenuBg;
