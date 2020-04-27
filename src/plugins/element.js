@@ -19,6 +19,9 @@ import {
   Tooltip,
   Table,
   TableColumn,
+  Popover,
+  CheckboxGroup,
+  Checkbox,
 } from 'element-ui'
 // import Scrollbar from 'element-ui/packages/scrollbar'
 // import ElementUI from 'element-ui';
@@ -40,6 +43,9 @@ Vue.use(DropdownItem)
 Vue.use(Tooltip)
 Vue.use(Table)
 Vue.use(TableColumn)
+Vue.use(Popover)
+Vue.use(CheckboxGroup)
+Vue.use(Checkbox)
 Vue.use(Loading.directive)
 
 Vue.prototype.$loading = Loading.service
