@@ -161,7 +161,7 @@ export const authorizeRoutes = [
       },
       {
         path: 'drag-table',
-        component: Page1,
+        component: () => import('../views/table/drag-table'),
         name: 'DragTable',
         meta: {
           title: '拖动表格',
