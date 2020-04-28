@@ -1,6 +1,6 @@
 <template>
   <section class="drag-table-container">
-    <el-table ref="dragTable" v-loading="loading" :data="rows" border fit stripe>
+    <el-table ref="dragTable" v-loading="loading" :data="rows" border fit>
       <el-table-column align="center" label="ID" width="120">
         <template v-slot="{row}">
           <span>{{ row.id }}</span>
@@ -28,7 +28,7 @@
       </el-table-column>
       <el-table-column label="drag" align="center">
         <template>
-          <svg-icon icon-class='drag' class='drag-svg' />
+          <svg-icon icon-class="drag" class="drag-svg" />
         </template>
       </el-table-column>
     </el-table>
@@ -36,7 +36,7 @@
     <el-pagination
       v-show="total > 0"
       background
-      class='table-pagination'
+      class="table-pagination"
       layout="prev, pager, next, sizes, total"
       :total="total"
       :current-page="query.page"
@@ -44,11 +44,16 @@
       @size-change="handleSizeChange"
       @current-change="handlePageChange"
     />
+
+    <div class="show-sort-list">
+      {{newList}}
+    </div>
   </section>
 </template>
 
 <script>
-import { fetchList } from '../../api/scripts'
+import Sortable from "sortablejs";
+import { fetchList } from "../../api/scripts";
 
 export default {
   name: "DragTable",
@@ -62,6 +67,7 @@ export default {
       },
       sortable: null,
       loading: false,
+      newList: [],
     };
   },
   computed: {
@@ -69,42 +75,59 @@ export default {
   },
   methods: {
     async getList() {
-      this.loading = true
-      const { data } = await fetchList(this.query)
-      this.rows = data.rows
-      this.total = data.total
-      console.log('data:', data)
-      this.loading = false
+      this.loading = true;
+      const { data } = await fetchList(this.query);
+      this.rows = data.rows;
+      this.total = data.total;
+      this.newList = this.rows.map(item => item.id)
+      this.loading = false;
       this.$nextTick(() => {
-        this.initSortable()
-      })
+        this.initSortable();
+      });
     },
     handleSizeChange(limit) {
-      this.query.limit = limit
-      this.getList()
+      this.query.limit = limit;
+      this.getList();
     },
     handlePageChange(page) {
-      this.query.page = page
-      this.getList()
+      this.query.page = page;
+      this.getList();
     },
     initSortable() {
-      this.$refs.dragTable.$el.querySelectorAll('.el-table__body-wrapper > table > tbody')[0]
+      const el = this.$refs.dragTable.$el.querySelectorAll(
+        ".el-table__body-wrapper > table > tbody"
+      )[0];
+      this.sortable = Sortable.create(el, {
+        ghostClass: "sortable-ghost",
+        onEnd: ({ oldIndex, newIndex }) => {
+          const oldItem = this.newList.splice(oldIndex, 1)[0]
+          this.newList.splice(newIndex, 0, oldItem)
+        }
+      });
     },
-    destorySortable () {
-      this.sortable && this.sortable.destory()
+    destorySortable() {
+      this.sortable.destroy && this.sortable.destroy();
     }
   },
   created() {
-    this.getList()
+    this.getList();
   },
   mounted() {
     //
   },
   destroyed() {
-    this.destorySortable()
+    this.destorySortable();
   }
 };
 </script>
+
+<style lang="scss">
+.sortable-ghost {
+  opacity: 0.8;
+  color: #fff !important;
+  background-color: #42b983 !important;
+}
+</style>
 
 <style lang="scss" scoped>
 .drag-table-container {
@@ -113,6 +136,10 @@ export default {
   }
   .drag-svg {
     font-size: 34px;
+  }
+  .show-sort-list {
+    margin-top: 24px;
+    padding-left: 20px;
   }
 }
 </style>
