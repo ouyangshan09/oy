@@ -70,7 +70,7 @@ export const publicRoutes = [
     children: [
       {
         path: 'index',
-        component: Page1,
+        component: () => import('../views/icons'),
         name: 'Icons',
         meta: {
           title: '图标',

@@ -1,0 +1,99 @@
+<template>
+  <div class="icon-container">
+    <el-tabs type="border-card">
+      <el-tab-pane label="用户图标">
+        <ul class="list clearfix">
+          <li class="icon-item" v-for="item in svgIcons" :key="item">
+            <el-tooltip placement="top">
+              <div slot="content">
+                {{generatorSvgContent(item)}}
+              </div>
+              <div>
+                <svg-icon :icon-class="item" />
+                <div class="icon-name">{{item}}</div>
+              </div>
+            </el-tooltip>
+          </li>
+        </ul>
+      </el-tab-pane>
+      <el-tab-pane label="组件图标">
+        <ul class="grid">
+          <li v-for="item in elementIcons" :key="item">
+            {{item}}
+          </li>
+        </ul>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
+</template>
+
+<script>
+import svgIconData from './svg-icon-data'
+import elementIconData from './element-icon-data'
+
+export default {
+  name: 'Icons',
+  data() {
+    return {
+      svgIcons: svgIconData,
+      elementIcons: elementIconData,
+    }
+  },
+  created() {
+  },
+  mounted() {
+    //
+  },
+  methods: {
+    generatorSvgContent(value) {
+      return `<svg-icon icon-class=${value} />`
+    },
+    generatorElementContent(value) {
+      return `<i class="el-icon-${value}">`
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.icon-container {
+  padding: 20px;
+
+  ul, li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .list {
+    border: 1px solid #eaeefb;
+
+    li {
+      float: left;
+      width: 16.66%;
+      text-align: center;
+      height: 85px;
+      line-height: 85px;
+      color: #666;
+      font-size: 30px;
+      border-right: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      margin-right: -1px;
+      margin-bottom: -1px;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #409eff;
+      }
+    }
+
+    .el-tooltip {
+      line-height: normal;
+    }
+
+    .icon-name {
+      font-size: 14px;
+    }
+  }
+}
+</style>

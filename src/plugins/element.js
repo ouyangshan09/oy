@@ -23,6 +23,8 @@ import {
   CheckboxGroup,
   Checkbox,
   Pagination,
+  Tabs,
+  TabPane,
 } from 'element-ui'
 // import Scrollbar from 'element-ui/packages/scrollbar'
 // import ElementUI from 'element-ui';
@@ -48,6 +50,8 @@ Vue.use(Popover)
 Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
 Vue.use(Pagination)
+Vue.use(Tabs)
+Vue.use(TabPane)
 Vue.use(Loading.directive)
 
 Vue.prototype.$loading = Loading.service
