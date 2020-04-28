@@ -168,14 +168,6 @@ export const authorizeRoutes = [
         },
       },
       {
-        path: 'dynamic-table',
-        component: Page1,
-        name: 'DynamicTable',
-        meta: {
-          title: '动态表格'
-        },
-      },
-      {
         path: 'inline-edit-table',
         component: Page1,
         name: 'InlineEditTable',
