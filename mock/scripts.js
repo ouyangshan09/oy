@@ -36,8 +36,8 @@ const interfaces = [
       return {
         code: 0,
         data: {
-          page: 1,
-          pageSize: 10,
+          page: parseInt(page),
+          pageSize: parseInt(limit),
           total: tableData.length,
           rows: pageList,
         },
