@@ -29,6 +29,5 @@ export default function handleCopyToClipboard(text, event) {
     clipboardFailure()
     clipboard.destroy()
   })
-
-  return clipboard
+  clipboard.onClick(event)
 }
