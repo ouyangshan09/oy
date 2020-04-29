@@ -55,9 +55,7 @@ export default {
     };
   },
   created() {},
-  mounted() {
-    //
-  },
+  mounted() {},
   methods: {
     generatorSvgContent(value) {
       return `<svg-icon icon-class='${value}' />`;
