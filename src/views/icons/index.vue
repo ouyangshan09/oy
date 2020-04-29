@@ -17,9 +17,17 @@
         </ul>
       </el-tab-pane>
       <el-tab-pane label="组件图标">
-        <ul class="grid">
-          <li v-for="item in elementIcons" :key="item">
-            {{item}}
+        <ul class="list clearfix">
+          <li class="icon-item" v-for="item in elementIcons" :key="item">
+            <el-tooltip placement="top">
+              <div slot="content">
+                {{generatorElementContent(item)}}
+              </div>
+              <div>
+                <i :class="'el-icon-' + item" />
+                <div class="icon-name">{{item}}</div>
+              </div>
+            </el-tooltip>
           </li>
         </ul>
       </el-tab-pane>
@@ -67,32 +75,39 @@ export default {
 
   .list {
     border: 1px solid #eaeefb;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
 
     li {
-      float: left;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
       width: 16.66%;
       text-align: center;
       height: 85px;
-      line-height: 85px;
       color: #666;
       font-size: 30px;
       border-right: 1px solid #eee;
       border-bottom: 1px solid #eee;
       margin-right: -1px;
       margin-bottom: -1px;
+    }
+
+    .el-tooltip {
       transition: color 0.3s;
 
       &:hover {
         color: #409eff;
+        cursor: pointer;
       }
-    }
-
-    .el-tooltip {
-      line-height: normal;
     }
 
     .icon-name {
       font-size: 14px;
+      margin-top: 15px;
     }
   }
 }
