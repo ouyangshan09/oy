@@ -8,7 +8,7 @@
               <div slot="content">
                 {{generatorSvgContent(item)}}
               </div>
-              <div>
+              <div @click.prevent="handleUserTextCodeToCopyBoard(item)">
                 <svg-icon :icon-class="item" />
                 <div class="icon-name">{{item}}</div>
               </div>
@@ -23,7 +23,7 @@
               <div slot="content">
                 {{generatorElementContent(item)}}
               </div>
-              <div>
+              <div @click.prevent="handleComponentTextCodeToCopyBoard(item)">
                 <i :class="'el-icon-' + item" />
                 <div class="icon-name">{{item}}</div>
               </div>
@@ -54,11 +54,19 @@ export default {
   },
   methods: {
     generatorSvgContent(value) {
-      return `<svg-icon icon-class=${value} />`
+      return `<svg-icon icon-class='${value}' />`
     },
     generatorElementContent(value) {
-      return `<i class="el-icon-${value}">`
-    }
+      return `<i class='el-icon-${value}'>`
+    },
+    handleUserTextCodeToCopyBoard(value) {
+      const code = this.generatorSvgContent(value)
+      console.log('user text:', code)
+    },
+    handleComponentTextCodeToCopyBoard(value) {
+      const code = this.generatorElementContent(value)
+      console.log('component text:', code)
+    },
   }
 }
 </script>
