@@ -25,6 +25,7 @@ import {
   Pagination,
   Tabs,
   TabPane,
+  Dialog,
 } from 'element-ui'
 // import Scrollbar from 'element-ui/packages/scrollbar'
 // import ElementUI from 'element-ui';
@@ -52,6 +53,7 @@ Vue.use(Checkbox)
 Vue.use(Pagination)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(Dialog)
 Vue.use(Loading.directive)
 
 Vue.prototype.$loading = Loading.service

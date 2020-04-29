@@ -132,7 +132,7 @@ export const authorizeRoutes = [
     children: [
       {
         path: 'menu',
-        component: Page1,
+        component: () => import('../views/permission'),
         name: 'MenuPermission',
         meta: {
           title: '菜单权限',
