@@ -1,7 +1,4 @@
-const { publicRoutes, authorizeRoutes } = require('../src/routes')
-const { deepClone } = require('../src/utils')
-
-const routes = deepClone([...publicRoutes, ...authorizeRoutes])
+const routeMenus = require('./data/menus')
 
 const interfaces = [
   {
@@ -11,7 +8,7 @@ const interfaces = [
       return {
         code: 0,
         data: {
-          menus: routes
+          menus: routeMenus
         },
         message: 'success',
       }
