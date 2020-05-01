@@ -2,7 +2,7 @@
   <div class="permission-container">
     <el-button type="primary" @click.native.prevent="handleAdd">新建角色</el-button>
 
-    <el-table :data="rows" class="role-table" border stripe>
+    <el-table :data="rows" v-loading="loading" class="role-table" border stripe>
       <el-table-column label="ID" align="center" width="100">
         <template v-slot="{row}">
           <span>{{row.id}}</span>
@@ -32,26 +32,36 @@
     </el-table>
 
     <el-dialog :visible.sync="visible" :title.sync="dialogTitleStatus[dialogStatus]">
-      <el-form ref="form" :model="role" label-width="80px">
-        <el-form-item label="名称">
+      <el-form ref="form" :model="role" :rules="roleRules" label-width="80px">
+        <el-form-item label="名称" prop="name">
           <el-input v-model="role.name" />
         </el-form-item>
-        <el-form-item label="描述">
+        <el-form-item label="描述" prop="describe">
           <el-input v-model="role.describe" />
         </el-form-item>
         <el-form-item label="菜单权限">
-          <el-tree :data="routeMenus" show-checkbox :props="defaultProps" />
+          <el-tree
+            :data="routeMenus"
+            :props="defaultProps"
+            node-key="path"
+            ref="tree"
+            show-checkbox
+          />
         </el-form-item>
       </el-form>
       <template slot="footer">
         <el-button type="danger" @click.native.prevent="handleClose">取消</el-button>
-        <el-button type="primary">提交</el-button>
+        <el-button type="primary" @click.native.prevent="confirmRole">提交</el-button>
       </template>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import menus, { generatorRoute } from '../../routes/menus'
+import { getRoleList } from '../../api/role'
+import { cleanJson } from '../../utils'
+
 export default {
   data() {
     return {
@@ -63,6 +73,7 @@ export default {
         add: "新建角色",
         edit: "编辑角色"
       },
+      loading: false,
       dialogStatus: "add",
       visible: false,
       role: {
@@ -74,19 +85,16 @@ export default {
       roleRules: {
         name: [{ required: true, message: "请输入角色名称", trigger: "blur" }]
       }, // 表单验证规则
-      routeMenus: [
-        { path: "/", name: "测试1" },
-        { path: "/2", name: "测试2" },
-        { path: "/3", name: "测试3" }
-      ], // 路由权限菜单
+      routeMenus: [], // 路由权限菜单
       defaultProps: {
-        label: "name",
+        label: "title",
         children: "children"
       }
     };
   },
   created() {
-    //
+    this.fetchMenuList()
+    this.fetchRoleList()
   },
   methods: {
     handleAdd() {
@@ -104,11 +112,27 @@ export default {
     handleRemove(data) {
       return data;
     },
-    fetchMenuList() {
-      // TODO 请求菜单数据
+    async fetchRoleList() {
+      this.loading = true
+      const { data } = await getRoleList()
+      this.rows = data
+      this.loading = false
     },
-    fetchRoleList() {
-      // TODO 请求角色列表
+    async fetchMenuList() {
+      this.routeMenus = menus
+    },
+    async confirmRole() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          const route = generatorRoute(this.$refs.tree.getCheckedKeys())
+          const next = {
+            ...this.role,
+            // TODO 将checkedKey 转换为真实路由
+            menus: route
+          }
+          console.log('form:', cleanJson(next))
+        }
+      })
     }
   }
 };

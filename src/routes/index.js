@@ -192,7 +192,7 @@ const createRouter = () => new Router({
   mode: 'history',
 })
 
-const router =createRouter()
+const router = createRouter()
 
 /**
  * 重置路由

@@ -1,5 +1,29 @@
 const routeMenus = require('./data/menus')
 
+const roles = [
+  {
+    id:  1,
+    name: 'admin',
+    describe: '超级管理员',
+    status: 1,
+    menus: routeMenus.filter(item => item.path === '/'),
+  },
+  {
+    id:  2,
+    name: 'editor',
+    describe: '业务管路员',
+    status: 1,
+    menus: routeMenus.filter(item => item.path !== '/permission' || item.path !== '/'),
+  },
+  {
+    id:  3,
+    name: 'guest',
+    describe: '访客',
+    status: 1,
+    menus: routeMenus.filter(item => item.path === '/'),
+  },
+]
+
 const interfaces = [
   {
     url: '/role/menus',
@@ -20,7 +44,7 @@ const interfaces = [
     response: res => {
       return {
         code: 0,
-        data: null,
+        data: roles,
         message: 'success'
       }
     }

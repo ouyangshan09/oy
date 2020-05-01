@@ -17,3 +17,10 @@ export function deepClone(source) {
   })
   return targetObject
 }
+
+/**
+ * 调试数据，清除多余的代理属性
+ */
+export function cleanJson(source) {
+  return JSON.parse(JSON.stringify(source))
+}
