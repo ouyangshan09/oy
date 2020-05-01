@@ -53,8 +53,6 @@ const cleanMenus = generatorCleanMenu(menus)
 export default cleanMenus
 
 export function generatorRoute(checkedKey = [], routes = menus, basePath = '/') {
-  console.log('checkedKey:', checkedKey)
-  console.log('routes:', routes)
   const result = []
 
   for (const route of routes) {
