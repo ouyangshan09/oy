@@ -6,7 +6,7 @@ const roles = [
     name: 'admin',
     describe: '超级管理员',
     status: 1,
-    menus: routeMenus.filter(item => item.path === '/'),
+    menus: routeMenus,
   },
   {
     id:  2,
