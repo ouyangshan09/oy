@@ -13,14 +13,14 @@ const roles = [
     name: 'editor',
     describe: '业务管路员',
     status: 1,
-    menus: routeMenus.filter(item => item.path !== '/permission' || item.path !== '/'),
+    menus: routeMenus.filter(item => item !== '/permission/menu'),
   },
   {
     id:  3,
     name: 'guest',
     describe: '访客',
     status: 1,
-    menus: routeMenus.filter(item => item.path === '/'),
+    menus: routeMenus.filter(item => item === '/home'),
   },
 ]
 

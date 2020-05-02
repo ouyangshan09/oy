@@ -24,9 +24,9 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="200">
-        <template v-slot="{row}">
+        <template v-slot="{row, $index}">
           <el-button type="primary" size="small" @click.native.prevent="handleUpdate(row)">编辑</el-button>
-          <el-button type="danger" size="small" @click.native.prevent="handleRemove(row)">删除</el-button>
+          <el-button type="danger" size="small" @click.native.prevent="handleRemove(row, $index)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -58,9 +58,16 @@
 </template>
 
 <script>
-import menus, { generatorRoute } from '../../routes/menus'
-import { getRoleList } from '../../api/role'
-import { cleanJson } from '../../utils'
+import menus from "../../routes/menus";
+import { getRoleList } from "../../api/role";
+import { cleanJson, deepClone } from "../../utils";
+
+const defaultRole = {
+  id: "",
+  name: "",
+  describe: "",
+  menus: []
+};
 
 export default {
   data() {
@@ -76,12 +83,7 @@ export default {
       loading: false,
       dialogStatus: "add",
       visible: false,
-      role: {
-        id: "",
-        name: "",
-        describe: "",
-        menus: []
-      }, // 表单数据
+      role: defaultRole, // 表单数据
       roleRules: {
         name: [{ required: true, message: "请输入角色名称", trigger: "blur" }]
       }, // 表单验证规则
@@ -93,8 +95,8 @@ export default {
     };
   },
   created() {
-    this.fetchMenuList()
-    this.fetchRoleList()
+    this.fetchMenuList();
+    this.fetchRoleList();
   },
   methods: {
     handleAdd() {
@@ -102,37 +104,59 @@ export default {
       this.visible = true;
     },
     handleClose() {
+      this.role = Object.assign({}, defaultRole);
+      this.$refs.tree.setCheckedKeys([]);
       this.visible = false;
     },
     handleUpdate(data) {
+      this.role = deepClone(data);
       this.dialogStatus = "edit";
       this.visible = true;
-      return data;
+      this.$nextTick(() => {
+        this.$refs.tree.setCheckedKeys(data.menus || []);
+      });
     },
-    handleRemove(data) {
+    handleRemove(data, $index) {
+      this.$confirm("请确定是否删除该角色", "Warning", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(async () => {
+          // TODO 请求后台接口
+          this.rows.splice($index, 1);
+          this.$message({
+            type: "success",
+            message: "删除成功"
+          });
+        })
+        .catch(() => {});
       return data;
     },
     async fetchRoleList() {
-      this.loading = true
-      const { data } = await getRoleList()
-      this.rows = data
-      this.loading = false
+      this.loading = true;
+      const { data } = await getRoleList();
+      this.rows = data;
+      this.loading = false;
     },
     async fetchMenuList() {
-      this.routeMenus = menus
+      this.routeMenus = menus;
     },
     async confirmRole() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          const route = generatorRoute(this.$refs.tree.getCheckedKeys())
           const next = {
             ...this.role,
-            // TODO 将checkedKey 转换为真实路由
-            menus: route
+            menus: this.$refs.tree.getCheckedKeys()
+          };
+          console.log("form:", cleanJson(next));
+          if (this.dialogStatus === "add") {
+            // 添加
+          } else {
+            // 修改
           }
-          console.log('form:', cleanJson(next))
         }
-      })
+      });
     }
   }
 };
