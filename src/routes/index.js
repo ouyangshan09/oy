@@ -169,7 +169,7 @@ export const authorizeRoutes = [
       },
       {
         path: 'inline-edit-table',
-        component: Page1,
+        component: () => import('../views/table/inline-edit-table'),
         name: 'InlineEditTable',
         meta: {
           title: '内联行编辑表格',
