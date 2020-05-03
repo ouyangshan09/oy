@@ -44,6 +44,28 @@ const interfaces = [
         message: 'success'
       }
     }
+  },
+  {
+    url: '/inline-table/queryList',
+    type: 'get',
+    response: request => {
+      return {
+        code: 0,
+        data: {},
+        message: 'success'
+      }
+    }
+  },
+  {
+    url: '/inline-table/updateItem',
+    type: 'put',
+    response: () => {
+      return {
+        cdoe: 0,
+        data: {},
+        message: 'success'
+      }
+    }
   }
 ]
 
