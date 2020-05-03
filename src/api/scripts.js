@@ -11,3 +11,10 @@ export function fetchList(data) {
   })
 }
 
+export function fetchList2() {
+  return request({
+    url: '/inline-table/queryList',
+    method: 'get',
+  })
+}
+

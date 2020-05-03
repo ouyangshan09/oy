@@ -3,11 +3,10 @@
 */
 const mockjs = require('mockjs')
 
-let tableData = []
 const count = 100
 const image_uri = 'https://wpimg.wallstcn.com/e4558086-631c-425c-9430-56ffb46e70b3'
 
-tableData = new Array(count).fill({}).map(() => {
+const tableData = new Array(count).fill({}).map(() => {
   return mockjs.mock({
     id: '@increment',
     timestamp: +mockjs.Random.date('T'),
@@ -15,6 +14,16 @@ tableData = new Array(count).fill({}).map(() => {
     title: '@title(5, 10)',
     content_short: 'mock data',
     image_uri,
+  })
+})
+
+const tableData2 = new Array(10).fill({}).map(() => {
+  return mockjs.mock({
+    id: '@increment',
+    title: '@title(5, 10)',
+    author: '@first',
+    updateAt: +mockjs.Random.date('T'),
+    stauts: mockjs.Random.integer(0, 1),
   })
 })
 
@@ -51,7 +60,9 @@ const interfaces = [
     response: request => {
       return {
         code: 0,
-        data: {},
+        data: {
+          rows: tableData2,
+        },
         message: 'success'
       }
     }
