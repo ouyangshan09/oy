@@ -6,9 +6,24 @@
           <span>{{ row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="标题" align="center">
+      <el-table-column label="标题" align="center" width="450">
         <template v-slot="{row}">
-          <span>{{ row.title }}</span>
+          <template v-if="row.edit">
+            <el-input
+              v-model="row.title"
+              class="edit-input"
+              size="small"
+            />
+            <el-button
+              class="cancel-btn"
+              size="small"
+              type="warning"
+              @click.prevent="handleCancelEdit(row)"
+            >
+              取消
+            </el-button>
+          </template>
+          <span v-else>{{ row.title }}</span>
         </template>
       </el-table-column>
       <el-table-column label="作者" align="center">
@@ -28,7 +43,22 @@
       </el-table-column>
       <el-table-column label="操作" align="center">
         <template v-slot="{row}">
-          <el-button type="primary" @click.native.prevent="handleUpdate(row)">修改</el-button>
+          <el-button
+            v-if="row.edit"
+            type="success"
+            size="small"
+            @click.prevent="handleConfirm(row)"
+          >
+            确认
+          </el-button>
+          <el-button
+            v-else
+            type="primary"
+            size="small"
+            @click.prevent="handleUpdate(row)"
+          >
+            修改
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -48,7 +78,16 @@ export default {
   },
   methods: {
     handleUpdate(data) {
+      data.edit = !data.edit
+    },
+    handleConfirm(data) {
       return data
+    },
+    handleCancelEdit(data) {
+      data.edit = false
+    },
+    async fetchList() {
+      // TODO 请求数据
     }
   }
 };
@@ -56,6 +95,6 @@ export default {
 
 <style lang="scss" scoped>
 .inline-edit-table-container {
-  //
+  padding: 20px;
 }
 </style>
