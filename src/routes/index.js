@@ -142,6 +142,27 @@ export const authorizeRoutes = [
     ],
   },
   {
+    path: '/user',
+    component: Layout,
+    name: 'User',
+    meta: {
+      title: '用户',
+      icon: 'peoples',
+      roles: ['admin'],
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('../views/user'),
+        name: 'UserManage',
+        meta: {
+          title: '用户管理',
+          roles: ['admin'],
+        }
+      }
+    ]
+  },
+  {
     path: '/table',
     name: 'Table',
     redirect: '/table/normal-table',
