@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { fetchList2 } from "../../api/scripts";
+import { fetchList2, updateInlineEditItem } from "../../api/scripts";
 // import { cleanJson } from '../../utils'
 
 export default {
@@ -73,7 +73,8 @@ export default {
     handleUpdate(data) {
       data.edit = !data.edit;
     },
-    handleConfirm(data) {
+    async handleConfirm(data) {
+      await updateInlineEditItem({ id: data.id, title: data.title })
       data.originTitle = data.title
       data.edit = false
       this.$message({

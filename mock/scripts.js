@@ -72,7 +72,7 @@ const interfaces = [
     type: 'put',
     response: () => {
       return {
-        cdoe: 0,
+        code: 0,
         data: {},
         message: 'success'
       }

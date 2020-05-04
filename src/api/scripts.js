@@ -18,3 +18,11 @@ export function fetchList2() {
   })
 }
 
+export function updateInlineEditItem(data) {
+  return request({
+    url: '/inline-table/updateItem',
+    method: 'put',
+    data: data,
+  })
+}
+
