@@ -28,6 +28,8 @@ module.exports = {
   chainWebpack: (config) => {
     // config.resolve.alias
     //   .set('vue$', 'vue/dist/vue.esm.js')
+    // config.plugins.delete('preload') // H5新特性（空闲加载） 提高体验
+    // config.plugins.delete('prefetch') // H5新特性（空闲加载） 提高体验
 
     config.module
       .rule('svg')

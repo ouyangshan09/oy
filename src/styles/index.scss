@@ -3,6 +3,21 @@
 @import './sidebar.scss';
 @import './transition.scss';
 
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  // box-sizing: inherit;
+}
+
+div:focus {
+  outline: none;
+}
+
 a,
 a:focus,
 a:hover {

@@ -177,7 +177,7 @@ export const authorizeRoutes = [
       },
       {
         path: 'condition-table',
-        component: Page1,
+        component: () => import('../views/table/condition-table'),
         name: 'ConditionTable',
         meta: {
           title: '多条件查询表格',
