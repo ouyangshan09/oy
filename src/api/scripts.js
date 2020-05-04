@@ -26,3 +26,11 @@ export function updateInlineEditItem(data) {
   })
 }
 
+export function fetchList3(data) {
+  return request({
+    url: '/condition-table/queryList',
+    method: 'get',
+    params: data,
+  })
+}
+
