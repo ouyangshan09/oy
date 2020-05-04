@@ -98,7 +98,7 @@ const interfaces = [
         if (username && item.username !== username) {
           return false
         }
-        if (status && item.status !== status) {
+        if (status && item.status != status) {
           return false
         }
         return true

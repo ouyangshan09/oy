@@ -6,17 +6,23 @@
         class="filter-item"
         placeholder="请输入用户名搜索"
         style="width: 200px"
+        size="small"
         @keyup.enter.native="handleSearch"
       />
-      <el-select v-model="query.status" class="filter-item" style="width: 130px">
-        <el-option :value="item.id" :key="item.id" v-for="item in statusList">
-          {{item.label}}
-        </el-option>
+      <el-select
+        v-model="query.status"
+        clearable
+        size="small"
+        class="filter-item"
+        style="width: 130px"
+      >
+        <el-option :value="item.id" :label="item.label" :key="item.id" v-for="item in statusList" />
       </el-select>
       <el-button
         class="filter-item"
         icon="el-icon-search"
         type="primary"
+        size="small"
         @click.prevent="handleSearch"
       >搜索</el-button>
     </div>
@@ -47,8 +53,8 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center">
-        <template v-slot="{row}">
-          <el-button type="danger" size="small" @click="handleRemove(row)">删除</el-button>
+        <template v-slot="{row, $index}">
+          <el-button type="danger" size="small" @click="handleRemove(row, $index)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -66,8 +72,8 @@
     />
 
     <el-dialog :title.sync="titleMap[dialogFormStatus]" :visible.sync="dialogFormVisible">
-      <el-form :model="form" :role="formRules" label-width="80px">
-        <el-form-item label="用户名">
+      <el-form ref="form" :model="form" :rules="formRules" label-width="80px">
+        <el-form-item prop="username" label="用户名">
           <el-input v-model="form.username" placeholder="请输入用户名" />
         </el-form-item>
         <el-form-item label="备注">
@@ -75,8 +81,8 @@
         </el-form-item>
       </el-form>
       <template slot="footer">
-        <el-button size="small" type="danger" @click="handleToggleFormDialog">取消</el-button>
-        <el-button size="small" type="primary">确认</el-button>
+        <el-button size="small" type="danger" @click="handleCloseDialog">取消</el-button>
+        <el-button size="small" type="primary" @click="handleConfirmDialog">确认</el-button>
       </template>
     </el-dialog>
   </div>
@@ -84,7 +90,12 @@
 
 <script>
 import { fetchList3 } from "../../api/scripts";
-import { cleanJson } from '../../utils'
+// import { cleanJson } from "../../utils";
+
+const defualtForm = {
+  username: "",
+  comment: ""
+};
 
 export default {
   name: "ConditionTable",
@@ -95,25 +106,30 @@ export default {
         page: 1,
         limt: 15,
         total: 0,
-        username: "",
-        status: ""
+        username: '',
+        status: ''
       },
       loading: false,
       dialogFormVisible: false,
-      dialogFormStatus: "add",
+      dialogFormStatus: 'add',
       titleMap: {
-        add: "添加",
-        update: "修改"
+        add: '添加',
+        update: '修改'
       },
       statusList: [
         { id: 1, label: '启用' },
-        { id: 2, label: '禁用' },
+        { id: 2, label: '禁用' }
       ],
       form: {
-        username: "",
-        comment: ""
+        id: '',
+        username: '',
+        comment: ''
       },
-      formRules: {}
+      formRules: {
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ]
+      }
     };
   },
   mounted() {
@@ -130,28 +146,51 @@ export default {
       this.query.total = data.total;
       // console.log('data:', data)
     },
-    handleToggleFormDialog() {
-      this.dialogFormVisible = !this.dialogFormVisible
+    handleCloseDialog() {
+      this.dialogFormVisible = false;
+      this.form = Object.assign({}, defualtForm);
+      this.$refs.form.resetFields();
+    },
+    handleConfirmDialog() {
+      const id = this.form.id
+      const index = this.rows.findIndex(item => item.id === id)
+      this.rows.splice(index, 1, {...this.form})
+      this.$refs.form.resetFields();
+      this.form = Object.assign({}, defualtForm)
+      this.dialogFormVisible = false
+      this.$message({
+        type: 'success',
+        message: '修改成功',
+      })
     },
     handleUpdateMsg(data) {
-      this.dialogFormVisible = true
-      return data;
+      this.dialogFormVisible = true;
+      this.form = Object.assign({}, data)
     },
-    handleRemove(data) {
-      return data;
+    handleRemove(data, index) {
+      this.$confirm('是否要删除该用户', '删除', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          this.rows.splice(index, 1);
+        })
+        .catch(() => {
+        });
     },
     handleSizeChange(limit) {
-      this.query.limt = limit
-      this.fetchList(this.query)
+      this.query.limt = limit;
+      this.fetchList(this.query);
     },
     handlePageChange(page) {
-      this.query.page = page
-      this.fetchList(this.query)
+      this.query.page = page;
+      this.fetchList(this.query);
     },
     handleSearch() {
-      this.query.page = 1
-      this.fetchList(this.query)
-      console.log('filter condition:', cleanJson(this.query))
+      this.query.page = 1;
+      this.fetchList(this.query);
+      // console.log("filter condition:", cleanJson(this.query));
     }
   }
 };
