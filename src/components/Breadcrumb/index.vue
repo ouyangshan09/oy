@@ -42,6 +42,8 @@ export default {
     },
     handleRouteLink(route) {
       const { path, redirect } = route
+      // TODO 做权限提示判断，如果页面配置有 backConfirmState，需要弹窗提示是否要跳转
+      // backConfirmState 是配置是否有重要的信息需要确认在操作
       if (redirect) {
         this.$router.push(redirect, () => null)
         return
