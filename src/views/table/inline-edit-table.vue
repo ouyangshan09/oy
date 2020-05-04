@@ -59,7 +59,11 @@ export default {
   data() {
     return {
       rows: [{}],
-      loading: false
+      loading: false,
+      query: {
+        page: 1,
+        limit: 15,
+      }
     };
   },
   mounted() {
@@ -70,9 +74,15 @@ export default {
       data.edit = !data.edit;
     },
     handleConfirm(data) {
-      return data;
+      data.originTitle = data.title
+      data.edit = false
+      this.$message({
+        type: 'success',
+        message: '修改成功'
+      })
     },
     handleCancelEdit(data) {
+      data.title = data.originTitle
       data.edit = false;
     },
     async fetchList() {
