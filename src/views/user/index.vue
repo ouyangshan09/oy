@@ -35,10 +35,21 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <pagination
+      v-show="query.total > 0"
+      :total="query.total"
+      :page="query.page"
+      :limit="query.limit"
+      @pagination="handlePagination"
+    />
+
   </div>
 </template>
 
 <script>
+import Pagination from '../../components/Pagination'
+
 const defaultForm = {
   id: "",
   username: "",
@@ -47,12 +58,15 @@ const defaultForm = {
 
 export default {
   name: "UserManage",
+  components: {
+    Pagination,
+  },
   data() {
     return {
       rows: [],
       query: {
         page: 1,
-        limit: 15,
+        limit: 20,
         total: 0,
         id: '',
         username: '',
@@ -81,6 +95,9 @@ export default {
     handleUpdateItem(data) {
       this.form = Object.assign({}, data);
       this.dialogFormVisible = true;
+    },
+    handlePagination(query) {
+      console.log('pagination query:', query)
     }
   }
 };
