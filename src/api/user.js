@@ -23,3 +23,11 @@ export function logout() {
   })
 }
 
+export function fetchList(data) {
+  return request({
+    url: '/admin-api/userList',
+    method: 'get',
+    params: data,
+  })
+}
+
