@@ -41,29 +41,29 @@ export const publicRoutes = [
       },
     ],
   },
-  {
-    path: '/menus',
-    component: Layout,
-    redirect: 'noRedirect',
-    meta: {
-      title: '菜单',
-      icon: 'lock',
-    },
-    children: [
-      {
-        path: 'menu1',
-        name: 'menu1',
-        component: Page1,
-        meta: { title: 'menu1' }
-      },
-      {
-        path: 'menu2',
-        name: 'menu2',
-        component: Page2,
-        meta: { title: 'menu2' }
-      }
-    ],
-  },
+  // {
+  //   path: '/menus',
+  //   component: Layout,
+  //   redirect: 'noRedirect',
+  //   meta: {
+  //     title: '菜单',
+  //     icon: 'lock',
+  //   },
+  //   children: [
+  //     {
+  //       path: 'menu1',
+  //       name: 'menu1',
+  //       component: Page1,
+  //       meta: { title: 'menu1' }
+  //     },
+  //     {
+  //       path: 'menu2',
+  //       name: 'menu2',
+  //       component: Page2,
+  //       meta: { title: 'menu2' }
+  //     }
+  //   ],
+  // },
   {
     path: '/icons',
     component: Layout,
@@ -162,50 +162,50 @@ export const authorizeRoutes = [
       }
     ]
   },
-  {
-    path: '/table',
-    name: 'Table',
-    redirect: '/table/normal-table',
-    component: Layout,
-    meta: {
-      title: '表格',
-      icon: 'table',
-    },
-    children: [
-      {
-        path: 'normal-table',
-        component: () => import('../views/table/normal-table'),
-        name: 'NormalTable',
-        meta: {
-          title: '普通表格',
-        },
-      },
-      {
-        path: 'drag-table',
-        component: () => import('../views/table/drag-table'),
-        name: 'DragTable',
-        meta: {
-          title: '拖动表格',
-        },
-      },
-      {
-        path: 'inline-edit-table',
-        component: () => import('../views/table/inline-edit-table'),
-        name: 'InlineEditTable',
-        meta: {
-          title: '内联行编辑表格',
-        },
-      },
-      {
-        path: 'condition-table',
-        component: () => import('../views/table/condition-table'),
-        name: 'ConditionTable',
-        meta: {
-          title: '多条件查询表格',
-        },
-      }
-    ]
-  }
+  // {
+  //   path: '/table',
+  //   name: 'Table',
+  //   redirect: '/table/normal-table',
+  //   component: Layout,
+  //   meta: {
+  //     title: '表格',
+  //     icon: 'table',
+  //   },
+  //   children: [
+  //     {
+  //       path: 'normal-table',
+  //       component: () => import('../views/table/normal-table'),
+  //       name: 'NormalTable',
+  //       meta: {
+  //         title: '普通表格',
+  //       },
+  //     },
+  //     {
+  //       path: 'drag-table',
+  //       component: () => import('../views/table/drag-table'),
+  //       name: 'DragTable',
+  //       meta: {
+  //         title: '拖动表格',
+  //       },
+  //     },
+  //     {
+  //       path: 'inline-edit-table',
+  //       component: () => import('../views/table/inline-edit-table'),
+  //       name: 'InlineEditTable',
+  //       meta: {
+  //         title: '内联行编辑表格',
+  //       },
+  //     },
+  //     {
+  //       path: 'condition-table',
+  //       component: () => import('../views/table/condition-table'),
+  //       name: 'ConditionTable',
+  //       meta: {
+  //         title: '多条件查询表格',
+  //       },
+  //     }
+  //   ]
+  // }
 ]
 
 const createRouter = () => new Router({
