@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import menus from "../../routes/menus";
+import menus from "@/routes/menus";
 import { getRoleList } from "../../api/role";
 import { cleanJson, deepClone } from "../../utils";
 
