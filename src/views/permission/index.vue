@@ -59,8 +59,8 @@
 
 <script>
 import menus from "@/routes/menus";
-import { getRoleList } from "../../api/role";
-import { cleanJson, deepClone } from "../../utils";
+import { getRoleList } from "@/api/role";
+import { cleanJson, deepClone } from "@/utils";
 
 const defaultRole = {
   id: "",
