@@ -1,25 +1,58 @@
 <template>
   <div class="app-container">
-    profile
+    <el-row v-if="user" :gutter="20">
+      <el-col :span="6">
+        <el-card>
+          <div slot="header" class="clearfix">
+            <span>关于我</span>
+          </div>
+          <user-card :user="user" />
+        </el-card>
+      </el-col>
+      <el-col :span="18">
+        <el-card>
+          <el-tabs v-model="tab">
+            <el-tab-pane label="活跃" name="activity">活跃</el-tab-pane>
+            <el-tab-pane label="时间线" name="timeline">时间线</el-tab-pane>
+            <el-tab-pane label="账户" name="account">账户</el-tab-pane>
+          </el-tabs>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import UserCard from './components/UserCard'
+
 export default {
-  name: 'Profile',
+  name: "Profile",
+  components: {
+    UserCard,
+  },
   data() {
     return {
-      //
-    }
+      user: null,
+      tab: "activity"
+    };
+  },
+  computed: {
+    ...mapGetters(["roles", "name"])
   },
   methods: {
-    //
+    getUser() {
+      this.user = {
+        role: this.roles.join(" | "),
+        name: this.name
+      };
+    }
   },
   mounted() {
-    //
+    this.getUser();
   },
   beforeDestroy() {
     //
   }
-}
+};
 </script>

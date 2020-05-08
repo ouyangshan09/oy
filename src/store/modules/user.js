@@ -8,7 +8,7 @@ import { resetRouter } from '../../routes'
 
 const state = {
   token: getToken(),
-  name: '',
+  name: 'Super Admin',
   avatar: '',
   roles: [],
 }

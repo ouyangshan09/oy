@@ -33,7 +33,9 @@ import {
   OptionGroup,
   Row,
   Col,
+  Card,
   Notification,
+  Progress,
 } from 'element-ui'
 // import Scrollbar from 'element-ui/packages/scrollbar'
 // import ElementUI from 'element-ui';
@@ -68,6 +70,8 @@ Vue.use(Option)
 Vue.use(OptionGroup)
 Vue.use(Row)
 Vue.use(Col)
+Vue.use(Card)
+Vue.use(Progress)
 Vue.use(Loading.directive)
 
 Vue.prototype.$loading = Loading.service
