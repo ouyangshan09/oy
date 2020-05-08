@@ -36,6 +36,8 @@ import {
   Card,
   Notification,
   Progress,
+  Timeline,
+  TimelineItem,
 } from 'element-ui'
 // import Scrollbar from 'element-ui/packages/scrollbar'
 // import ElementUI from 'element-ui';
@@ -72,6 +74,8 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Card)
 Vue.use(Progress)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 Vue.use(Loading.directive)
 
 Vue.prototype.$loading = Loading.service

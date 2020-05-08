@@ -13,7 +13,9 @@
         <el-card>
           <el-tabs v-model="tab">
             <el-tab-pane label="活跃" name="activity">活跃</el-tab-pane>
-            <el-tab-pane label="时间线" name="timeline">时间线</el-tab-pane>
+            <el-tab-pane label="时间线" name="timeline">
+              <time-line />
+            </el-tab-pane>
             <el-tab-pane label="账户" name="account">账户</el-tab-pane>
           </el-tabs>
         </el-card>
@@ -25,11 +27,13 @@
 <script>
 import { mapGetters } from "vuex";
 import UserCard from './components/UserCard'
+import TimeLine from './components/TimeLine'
 
 export default {
   name: "Profile",
   components: {
     UserCard,
+    TimeLine,
   },
   data() {
     return {
