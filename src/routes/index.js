@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Login from '../views/login'
 import Layout from '../layout'
 import Page1 from '../views/page1'
-import Page2 from '../views/page2'
 import Redirect from '../views/redirect'
 // import Home from '../views/home'
 
@@ -88,7 +87,7 @@ export const publicRoutes = [
     children: [
       {
         path: 'index',
-        component: Page2,
+        component: () => import('@/views/profile'),
         name: 'Profile',
         meta: {
           title: '个人信息',
