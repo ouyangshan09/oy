@@ -30,7 +30,10 @@ import {
   MessageBox,
   Select,
   Option,
-  OptionGroup
+  OptionGroup,
+  Row,
+  Col,
+  Notification,
 } from 'element-ui'
 // import Scrollbar from 'element-ui/packages/scrollbar'
 // import ElementUI from 'element-ui';
@@ -63,9 +66,14 @@ Vue.use(Tree)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(OptionGroup)
+Vue.use(Row)
+Vue.use(Col)
 Vue.use(Loading.directive)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$notify = Notification
 
