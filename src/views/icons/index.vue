@@ -61,7 +61,7 @@ export default {
       return `<svg-icon icon-class='${value}' />`;
     },
     generatorElementContent(value) {
-      return `<i class='el-icon-${value}'>`;
+      return `<i class='el-icon-${value}' />`;
     },
     handleUserTextCodeToCopyBoard(value, event) {
       const code = this.generatorSvgContent(value);
