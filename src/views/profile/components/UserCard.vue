@@ -5,7 +5,7 @@
         <img src="@/assets/user-avatar.jpg" />
       </div>
       <div class="user-name">{{this.user.name}}</div>
-      <div class="user-role">{{this.user.role}}</div>
+      <div class="user-role">{{this.user.role | uppercaseFirst}}</div>
     </div>
     <div class="user-process">
       <div class="process-section">

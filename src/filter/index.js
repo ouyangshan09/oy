@@ -8,3 +8,7 @@ export function tableStatusToText(value) {
       return 'unknown'
   }
 }
+
+export function uppercaseFirst(value = '') {
+  return value.charAt(0).toUpperCase() + value.slice(1)
+}
