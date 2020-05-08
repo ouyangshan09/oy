@@ -1,5 +1,5 @@
 <template>
-  <div class="icon-container">
+  <div class="app-container">
     <el-tabs type="border-card">
       <el-tab-pane label="用户图标">
         <ul class="list clearfix">
@@ -76,9 +76,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.icon-container {
-  padding: 20px;
-
+.app-container {
   ul,
   li {
     padding: 0;

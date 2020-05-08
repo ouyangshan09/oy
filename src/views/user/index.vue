@@ -1,5 +1,5 @@
 <template>
-  <div class="user-container">
+  <div class="app-container">
     <div class="filter-condition">
       <el-input
         class="filter-item"
@@ -221,9 +221,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-container {
-  padding: 20px;
-
+.app-container {
   .filter-condition {
     margin-bottom: 10px;
   }

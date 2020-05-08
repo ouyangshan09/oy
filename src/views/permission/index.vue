@@ -1,5 +1,5 @@
 <template>
-  <div class="permission-container">
+  <div class="app-container">
     <el-button type="primary" @click.native.prevent="handleAdd">新建角色</el-button>
 
     <el-table :data="rows" v-loading="loading" class="role-table" border stripe>
@@ -163,9 +163,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.permission-container {
-  padding: 20px;
-
+.app-container {
   .role-table {
     margin-top: 30px;
   }
