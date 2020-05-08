@@ -18,7 +18,9 @@
             <el-tab-pane label="时间线" name="timeline">
               <time-line />
             </el-tab-pane>
-            <el-tab-pane label="账户" name="account">账户</el-tab-pane>
+            <el-tab-pane label="账户" name="account">
+              <account :user="user" />
+            </el-tab-pane>
           </el-tabs>
         </el-card>
       </el-col>
@@ -31,6 +33,7 @@ import { mapGetters } from "vuex";
 import UserCard from './components/UserCard'
 import TimeLine from './components/TimeLine'
 import Activity from './components/Activity'
+import Account from './components/Account'
 
 export default {
   name: "Profile",
@@ -38,6 +41,7 @@ export default {
     UserCard,
     TimeLine,
     Activity,
+    Account,
   },
   data() {
     return {

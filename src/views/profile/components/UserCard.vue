@@ -55,7 +55,7 @@ export default {
       if (value >= 90) {
         return 'success'
       } else if (value >= 60 && value < 90) {
-        return ''
+        return undefined
       } else {
         return 'exception'
       }
