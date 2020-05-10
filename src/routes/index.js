@@ -145,6 +145,15 @@ export const authorizeRoutes = [
           title: '质检工作台',
           roles: ['admin']
         },
+      },
+      {
+        path: 'query',
+        component: () => import('@/views/quality/query'),
+        name: 'Query',
+        meta: {
+          title: '质检查询',
+          roles: ['admin'],
+        }
       }
     ]
   },
