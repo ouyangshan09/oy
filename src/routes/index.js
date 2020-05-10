@@ -122,19 +122,28 @@ export const authorizeRoutes = [
     component: Layout,
     name: 'Quality',
     meta: {
-      title: '质检',
+      title: '质检管理',
       icon: 'guide',
       roles: ['admin'],
     },
     children: [
       {
         path: 'role',
-        component: () => import('@/views/page1'),
+        component: () => import('@/views/quality/role'),
         name: 'Role',
         meta: {
           title: '质检规则',
           roles: ['admin'],
         }
+      },
+      {
+        path: 'workbench',
+        component: () => import('@/views/quality/workbench'),
+        name: 'Workbench',
+        meta: {
+          title: '质检工作台',
+          roles: ['admin']
+        },
       }
     ]
   },
