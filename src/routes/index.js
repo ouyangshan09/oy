@@ -118,6 +118,27 @@ export const publicRoutes = [
 */
 export const authorizeRoutes = [
   {
+    path: '/quality',
+    component: Layout,
+    name: 'Quality',
+    meta: {
+      title: '质检',
+      icon: 'guide',
+      roles: ['admin'],
+    },
+    children: [
+      {
+        path: 'role',
+        component: () => import('@/views/page1'),
+        name: 'Role',
+        meta: {
+          title: '质检规则',
+          roles: ['admin'],
+        }
+      }
+    ]
+  },
+  {
     path: '/permission',
     // redirect: '/permission/menu',
     redirect: 'noRedirect',
