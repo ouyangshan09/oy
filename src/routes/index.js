@@ -121,6 +121,7 @@ export const authorizeRoutes = [
     path: '/quality',
     component: Layout,
     name: 'Quality',
+    redirect: 'noRedirect',
     meta: {
       title: '质检管理',
       icon: 'guide',
