@@ -1,10 +1,10 @@
-FROM node:10-slim
+FROM node:10-slim as builder
 COPY ./ /app
 WORKDIR /app
 RUN yarn && yarn build
 
-FROM nginx
+FROM nginx as service
 RUN mkdir /app
-COPY --from=0 /app/dist /app
+COPY --from=builder /app/dist /app
 COPY nginx.conf /etc/nginx/nginx.conf
 
