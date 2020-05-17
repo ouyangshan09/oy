@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
-    <el-row v-if="user" :gutter="20">
+    <el-row v-if="profile" :gutter="20">
       <el-col :span="6">
         <el-card>
           <div slot="header" class="clearfix">
             <span>关于我</span>
           </div>
-          <user-card :user="user" />
+          <user-card :user="profile" />
         </el-card>
       </el-col>
       <el-col :span="18">
@@ -19,7 +19,7 @@
               <time-line />
             </el-tab-pane>
             <el-tab-pane label="账户" name="account">
-              <account :user="user" />
+              <account :user="profile" />
             </el-tab-pane>
           </el-tabs>
         </el-card>
@@ -45,23 +45,17 @@ export default {
   },
   data() {
     return {
-      user: null,
       tab: "activity"
     };
   },
   computed: {
-    ...mapGetters(["roles", "name"])
+    ...mapGetters([
+      'profile',
+    ])
   },
   methods: {
-    getUser() {
-      this.user = {
-        role: this.roles.join(" | "),
-        name: this.name
-      };
-    }
   },
   mounted() {
-    this.getUser();
   },
   beforeDestroy() {
     //
