@@ -38,6 +38,7 @@ import {
   Progress,
   Timeline,
   TimelineItem,
+  Cascader,
 } from 'element-ui'
 // import Scrollbar from 'element-ui/packages/scrollbar'
 // import ElementUI from 'element-ui';
@@ -50,7 +51,6 @@ Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Submenu)
 Vue.use(MenuItemGroup)
-Vue.use(Scrollbar)
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
 Vue.use(Dropdown)
@@ -76,6 +76,8 @@ Vue.use(Card)
 Vue.use(Progress)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
+Vue.use(Cascader)
+Vue.use(Scrollbar)
 Vue.use(Loading.directive)
 
 Vue.prototype.$loading = Loading.service
