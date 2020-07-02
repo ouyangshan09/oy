@@ -57,4 +57,7 @@ instance.interceptors.response.use(
   },
 )
 
+export {
+  axios,
+}
 export default instance
