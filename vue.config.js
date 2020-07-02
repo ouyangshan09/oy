@@ -5,13 +5,15 @@ function resolve(value) {
   return path.resolve(__dirname, value)
 }
 
-const prot = process.env.APP_PORT
+const prot = process.env.VUE_APP_PORT
+const host = process.env.VUE_APP_HOST
 
 module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
     port: prot || 8080,
+    host: host,
     overlay: {
       warnings: false,
       errors: true
